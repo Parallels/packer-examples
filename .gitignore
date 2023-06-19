@@ -11,8 +11,12 @@ crash.log
 # subject to change depending on the environment.
 #
 *.pkrvars.hcl
+!variables_TEMPLATE.pkrvars.hcl
 
 # For built boxes
-*.box
+**/*.box
 
 **/*.pvm/
+**/out/
+
+.DS_Store

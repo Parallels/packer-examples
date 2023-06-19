@@ -22,7 +22,7 @@ d-i partman/confirm_write_new_label boolean true
 d-i partman-partitioning/no_bootable_gpt_biosgrub boolean false
 d-i partman-partitioning/no_bootable_gpt_efi boolean false
 d-i partman-efi/non_efi_system boolean true
-d-i passwd/user-fullname string ubuntu
+d-i passwd/user-fullname string ${username}
 d-i passwd/user-uid string 1000
 d-i passwd/user-password password ${password}
 d-i passwd/user-password-again password ${password}

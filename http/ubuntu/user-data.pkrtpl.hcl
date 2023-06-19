@@ -2,9 +2,9 @@
 autoinstall:
   version: 1
   identity:
-    hostname: ubuntu
-    username: ubuntu
-    password: '$6$nSAgaq1pQ5Nj4vLt$XMLQmBDftmbkR.Jn96zvxn0ecZIzow85CDls6CGi/tgRdfyuYg6NsFK7kkMJPctzpLelteyd60hM1d6XJ2cLs/'
+    hostname: ${hostname}
+    username: ${username}
+    password: '${password}'
   early-commands:
     # otherwise packer tries to connect and exceed max attempts:
     - systemctl stop ssh.service
@@ -14,4 +14,4 @@ autoinstall:
     allow-pw: yes
   late-commands:
     - 'sed -i "s/dhcp4: true/&\n      dhcp-identifier: mac/" /target/etc/netplan/00-installer-config.yaml'
-    - echo 'ubuntu ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/ubuntu
+    - echo '${username} ALL=(ALL) NOPASSWD:ALL' > /target/etc/sudoers.d/${username}

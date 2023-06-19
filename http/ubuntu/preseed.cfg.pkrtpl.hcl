@@ -60,7 +60,7 @@ d-i partman/confirm_write_new_label boolean true
 ### Account setup
 d-i passwd/root-login boolean false
 d-i passwd/user-fullname string ${username}
-d-i passwd/user-uid string 1000 ${userId}
+d-i passwd/user-uid string 1000
 d-i passwd/user-password password ${password}
 d-i passwd/user-password-again password ${password}
 d-i passwd/username string ${username}
