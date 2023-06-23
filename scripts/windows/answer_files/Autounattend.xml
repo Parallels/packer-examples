@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<unattend xmlns="urn:schemas-microsoft-com:unattend"
+  xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State">
+  <settings pass="offlineServicing"></settings>
+  <settings pass="windowsPE">
+    <component name="Microsoft-Windows-International-Core-WinPE" processorArchitecture="arm64"
+      publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <SetupUILanguage>
+        <UILanguage>en-US</UILanguage>
+      </SetupUILanguage>
+      <InputLocale>en-US</InputLocale>
+      <SystemLocale>en-US</SystemLocale>
+      <UILanguage>en-US</UILanguage>
+      <UILanguageFallback>en-US</UILanguageFallback>
+      <UserLocale>en-US</UserLocale>
+    </component>
+    <component name="Microsoft-Windows-Setup" processorArchitecture="arm64"
+      publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <UserData>
+        <ProductKey>
+          <Key>VK7JG-NPHTM-C97JM-9MPGT-3V66T</Key>
+        </ProductKey>
+        <AcceptEula>true</AcceptEula>
+        <FullName>Parallels</FullName>
+        <Organization>Parallels, Inc.</Organization>
+      </UserData>
+      <ImageInstall>
+        <OSImage>
+          <InstallFrom>
+            <MetaData wcm:action="add">
+              <Key>/IMAGE/NAME</Key>
+              <Value>Windows 11 Professional</Value>
+            </MetaData>
+          </InstallFrom>
+          <InstallTo>
+            <DiskID>0</DiskID>
+            <PartitionID>3</PartitionID>
+          </InstallTo>
+        </OSImage>
+      </ImageInstall>
+      <RunSynchronous>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>1</Order>
+          <Path>cmd.exe /c echo SELECT DISK=0 &gt;&gt; X:\diskpart.txt</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>2</Order>
+          <Path>cmd.exe /c echo CLEAN &gt;&gt; X:\diskpart.txt</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>3</Order>
+          <Path>cmd.exe /c echo CONVERT GPT &gt;&gt; X:\diskpart.txt</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>4</Order>
+          <Path>cmd.exe /c echo CREATE PARTITION EFI SIZE=100 &gt;&gt; X:\diskpart.txt</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>5</Order>
+          <Path>cmd.exe /c echo FORMAT QUICK FS=FAT32 LABEL="System" &gt;&gt; X:\diskpart.txt</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>6</Order>
+          <Path>cmd.exe /c echo CREATE PARTITION MSR SIZE=16 &gt;&gt; X:\diskpart.txt</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>7</Order>
+          <Path>cmd.exe /c echo CREATE PARTITION PRIMARY &gt;&gt; X:\diskpart.txt</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>8</Order>
+          <Path>cmd.exe /c echo SHRINK MINIMUM=500 &gt;&gt; X:\diskpart.txt</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>9</Order>
+          <Path>cmd.exe /c echo FORMAT QUICK FS=NTFS LABEL="Windows" &gt;&gt; X:\diskpart.txt</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>10</Order>
+          <Path>cmd.exe /c echo CREATE PARTITION PRIMARY &gt;&gt; X:\diskpart.txt</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>11</Order>
+          <Path>cmd.exe /c echo FORMAT QUICK FS=NTFS LABEL="Recovery" &gt;&gt; X:\diskpart.txt</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>12</Order>
+          <Path>cmd.exe /c echo SET ID="de94bba4-06d1-4d40-a16a-bfd50179d6ac" &gt;&gt; X:\diskpart.txt</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>13</Order>
+          <Path>cmd.exe /c echo GPT ATTRIBUTES=0x8000000000000001 &gt;&gt; X:\diskpart.txt</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+          <Order>14</Order>
+          <Path>cmd.exe /c diskpart /s X:\diskpart.txt &gt;&gt; X:\diskpart.log</Path>
+        </RunSynchronousCommand>
+        <RunSynchronousCommand wcm:action="add">
+					<Order>15</Order>
+					<Path>%windir%\system32\reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassTPMCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>16</Order>
+					<Path>%windir%\system32\reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassSecureBootCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>17</Order>
+					<Path>%windir%\system32\reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassStorageCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+				<RunSynchronousCommand wcm:action="add">
+					<Order>18</Order>
+					<Path>%windir%\system32\reg.exe add "HKLM\SYSTEM\Setup\LabConfig" /v BypassRAMCheck /t REG_DWORD /d 1 /f</Path>
+				</RunSynchronousCommand>
+      </RunSynchronous>
+    </component>
+    <component name="Microsoft-Windows-PnpCustomizationsWinPE" processorArchitecture="arm64" publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <DriverPaths>
+        <PathAndCredentials wcm:keyValue="1" wcm:action="add">
+            <Path>E:\Drivers\virtio_net\Win10\ARM64</Path> 
+        </PathAndCredentials>
+      </DriverPaths>
+    </component>
+  </settings>
+  <settings pass="generalize">
+    <component name="Microsoft-Windows-Security-SPP" processorArchitecture="arm64"
+      publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"
+      xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <SkipRearm>1</SkipRearm>
+    </component>
+    <component name="Microsoft-Windows-PnpSysprep" processorArchitecture="arm64"
+      publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS"
+      xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <PersistAllDeviceInstalls>false</PersistAllDeviceInstalls>
+      <DoNotCleanUpNonPresentDevices>false</DoNotCleanUpNonPresentDevices>
+    </component>
+  </settings>
+  <settings pass="specialize">
+    <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      name="Microsoft-Windows-ServerManager-SvrMgrNc" processorArchitecture="arm64"
+      publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <DoNotOpenServerManagerAtLogon>true</DoNotOpenServerManagerAtLogon>
+    </component>
+    <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="Microsoft-Windows-IE-ESC"
+      processorArchitecture="arm64" publicKeyToken="31bf3856ad364e35" language="neutral"
+      versionScope="nonSxS">
+      <!--  Disable IE ESC.  -->
+      <IEHardenAdmin>false</IEHardenAdmin>
+      <IEHardenUser>false</IEHardenUser>
+    </component>
+    <component xmlns:wcm="http://schemas.microsoft.com/WMIConfig/2002/State"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      name="Microsoft-Windows-OutOfBoxExperience" processorArchitecture="arm64"
+      publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <DoNotOpenInitialConfigurationTasksAtLogon>true</DoNotOpenInitialConfigurationTasksAtLogon>
+    </component>
+  </settings>
+  <settings pass="auditSystem"></settings>
+  <settings pass="auditUser"></settings>
+  <settings pass="oobeSystem">
+    <component name="Microsoft-Windows-International-Core" processorArchitecture="arm64"
+      publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <SystemLocale>en-US</SystemLocale>
+      <InputLocale>en-US</InputLocale>
+      <UILanguage>en-US</UILanguage>
+      <UserLocale>en-US</UserLocale>
+    </component>
+    <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="arm64"
+      publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <UserAccounts>
+        <AdministratorPassword>
+          <Value>vagrant</Value>
+          <PlainText>true</PlainText>
+        </AdministratorPassword>
+        <LocalAccounts>
+          <LocalAccount wcm:action="add">
+            <Password>
+              <Value>vagrant</Value>
+              <PlainText>true</PlainText>
+            </Password>
+            <Description>Vagrant User</Description>
+            <DisplayName>vagrant</DisplayName>
+            <Group>administrators</Group>
+            <Name>vagrant</Name>
+          </LocalAccount>
+        </LocalAccounts>
+      </UserAccounts>
+      <AutoLogon>
+        <Password>
+          <Value>vagrant</Value>
+          <PlainText>true</PlainText>
+        </Password>
+        <Username>vagrant</Username>
+        <Enabled>true</Enabled>
+      </AutoLogon>
+      <FirstLogonCommands>
+        <SynchronousCommand wcm:action="add">
+          <CommandLine>powershell -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Force"</CommandLine>
+          <Description>Set Execution Policy 64 Bit</Description>
+          <Order>1</Order>
+          <RequiresUserInput>false</RequiresUserInput>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <CommandLine>powershell -NoLogo -ExecutionPolicy RemoteSigned -File F:\winget.ps1</CommandLine>
+          <Order>2</Order>
+          <Description>Disable password expiration for vagrant user</Description>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <CommandLine>cmd.exe /c G:\PTAgent.exe /install_silent</CommandLine>
+          <Order>3</Order>
+          <Description>Install Parallels Desktop tools</Description>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <CommandLine>powershell -NoLogo -ExecutionPolicy RemoteSigned -File F:\base_setup.ps1</CommandLine>
+          <Description>Configure WinRM so packer can connect</Description>
+          <Order>4</Order>
+          <RequiresUserInput>false</RequiresUserInput>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <CommandLine>cmd.exe /c wmic useraccount where "name='vagrant'" set PasswordExpires=FALSE</CommandLine>
+          <Order>5</Order>
+          <Description>Disable password expiration for vagrant user</Description>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <CommandLine>powershell -NoLogo -ExecutionPolicy RemoteSigned -File "F:\chocolatey.ps1"</CommandLine>
+          <Description>Installing chocolatey package manager</Description>
+          <Order>6</Order>
+          <RequiresUserInput>true</RequiresUserInput>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <CommandLine>powershell -NoLogo -ExecutionPolicy RemoteSigned -File "F:\vagrant.ps1"</CommandLine>
+          <Description>Installing public SSH key for vagrant</Description>
+          <Order>7</Order>
+          <RequiresUserInput>true</RequiresUserInput>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <CommandLine>powershell -NoLogo -ExecutionPolicy RemoteSigned -File "F:\setup.ps1"</CommandLine>
+          <Description>Further fine tunning</Description>
+          <Order>8</Order>
+          <RequiresUserInput>true</RequiresUserInput>
+        </SynchronousCommand>
+        <SynchronousCommand wcm:action="add">
+          <CommandLine>powershell -NoLogo -ExecutionPolicy RemoteSigned -File F:\enable-ssh.ps1</CommandLine>
+          <Description>Enables the SSH on windows for packer</Description>
+          <Order>9</Order>
+          <RequiresUserInput>true</RequiresUserInput>
+        </SynchronousCommand>
+      </FirstLogonCommands>
+      <OOBE>
+        <HideEULAPage>true</HideEULAPage>
+        <HideLocalAccountScreen>true</HideLocalAccountScreen>
+        <HideOEMRegistrationScreen>true</HideOEMRegistrationScreen>
+        <HideOnlineAccountScreens>true</HideOnlineAccountScreens>
+        <HideWirelessSetupInOOBE>true</HideWirelessSetupInOOBE>
+        <NetworkLocation>Work</NetworkLocation>
+        <ProtectYourPC>3</ProtectYourPC>
+        <SkipMachineOOBE>true</SkipMachineOOBE>
+        <SkipUserOOBE>true</SkipUserOOBE>
+      </OOBE>
+      <TimeZone>UTC</TimeZone>
+    </component>
+  </settings>
+</unattend>

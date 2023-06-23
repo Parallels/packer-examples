@@ -18,5 +18,11 @@ crash.log
 
 **/*.pvm/
 **/out/
-
-.DS_Store
+**/*.iso
+!**/unattended.iso
+**/.DS_Store
+**/*.local*
+**/*.override*
+*.key
+**/test/
+**/box/

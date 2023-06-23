@@ -2,7 +2,7 @@ locals {
   version  = replace(var.version, ".", "_")
   hostname = var.hostname == "" ? "ubuntu_${local.version}" : var.hostname
 
-  boot_command = length(var.isos_urls) == 0 ? [
+  boot_command = length(var.boot_command) == 0 ? [
     "<wait>e<wait><down><down><down><end><wait> autoinstall ds=nocloud-net\\;s=http://{{.HTTPIP}}:{{.HTTPPort}}/ubuntu/<f10><wait>"
   ] : var.boot_command
 
