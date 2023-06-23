@@ -1,4 +1,4 @@
-# Ubuntu base Machines with Packer and Vagrant
+# Ubuntu base Machines with Packer and Vagrant for Parallels Desktop and Mac with Apple Silicon chip
 
 ## Getting Started
 
