@@ -32,7 +32,7 @@ Microsoft only provides the VHDXok file. You can get one by using the [UUP Dump]
 * you will also need to get the file checksum in sha-256, you can get this by running the following command:
 
  ```bash
-  shasum -a 256 <path to iso>
+$ shasum -a 256 <path to iso>
   ```
 
 ## Autounattend.xml and the Windows Answer File
@@ -42,7 +42,7 @@ The Windows Answer File is used to automate the installation of Windows. It is a
 We have a ready to use `unattended.iso` that contains this plus all the required bits to install Windows 11 on ARM. If you want to further customize this for example the default user, you can use the `autounattend.xml` file in this repository in `scripts/windows/answer_files` as a starting point and add your own configuration to it. You will need to generate a new `unattended.iso` file. This can be done by running the following command:
 
 ```bash
-hdiutil makehybrid -iso -joliet -o unattended.iso ./answer_files
+$ hdiutil makehybrid -iso -joliet -o unattended.iso ./answer_files
 ```
 
 once this is done replace the current `unattended.iso` file with the new one.
