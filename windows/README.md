@@ -17,18 +17,17 @@ The Parallels Virtualization SDK is required to build the virtual machine. It ca
   export PYTHONPATH=$PYTHONPATH:/Library/Frameworks/ParallelsVirtualizationSDK.framework/Versions/Current/Libraries/Python/3.7
   ```
 
-### Windows 11 on ARM ISO
+### Windows 11 on Arm ISO
 
-You will need to download the Windows 11 on ARM ISO.
-Microsoft only provides the VHDXok file. You can get one by using the [UUP Dump](https://uupdump.net/) service. 
+You will need to download Windows 11 on Arm ISO file.
 
-* Select the latest Windows 11 build for ARM64
-* follow the online instructions to download the scripts
-* run the `uup_download_macos.sh` script
-  > This will require some extra software to be installed on your Mac. Follow the instructions in the ```readme.unix.md``` file that is created in the directory where you run the script.
+a. Most users will be best served by the Get Windows 11 from Microsoft option to download the ISO image as described [here] (https://kb.parallels.com/125375), interrupting the process once the image is downloaded. The ISO image can then be found in the ~/Downloads folder.
 
-  * Alternatively you can use a linux VM and run the `uup_download_linux.sh` script from there, you will still need to install all of the required software, but it is a bit easier to do on linux and you will have a cleaner environment.
-* Once the script has finished you will have an usable ISO file in the script directory. you can either copy it into this folder or you can use that folder as the isoPath.
+b. Corporate users can find the image on Microsoft’s Business portal.
+
+ 
+Downloading Windows ISO from the Microsoft Business portal
+
 * you will also need to get the file checksum in sha-256, you can get this by running the following command:
 
  ```bash
@@ -37,9 +36,9 @@ $ shasum -a 256 <path to iso>
 
 ## Autounattend.xml and the Windows Answer File
 
-The Windows Answer File is used to automate the installation of Windows. It is a XML file that is used by Windows Setup to configure the installation. It can be used to automate the installation of Windows, but it can also be used to configure the Windows installation. This is done by adding the configuration to the `autounattend.xml` file. This file is then used by Windows Setup to configure the installation.
+The Windows Answer File is used to automate the installation of Windows. It is an XML file that is used by Windows Setup to configure the installation. It can be used to automate the installation of Windows, but it can also be used to configure the Windows installation. This is done by adding the configuration to the `autounattend.xml` file. This file is then used by Windows Setup to configure the installation.
 
-We have a ready to use `unattended.iso` that contains this plus all the required bits to install Windows 11 on ARM. If you want to further customize this for example the default user, you can use the `autounattend.xml` file in this repository in `scripts/windows/answer_files` as a starting point and add your own configuration to it. You will need to generate a new `unattended.iso` file. This can be done by running the following command:
+We have a ready-to-use `unattended.iso` that contains this plus all the required bits to install Windows 11 on ARM. If you want to further customize this for example the default user, you can use the `autounattend.xml` file in this repository in `scripts/windows/answer_files` as a starting point and add your own configuration to it. You will need to generate a new `unattended.iso` file. This can be done by running the following command:
 
 ```bash
 $ hdiutil makehybrid -iso -joliet -o unattended.iso ./answer_files
