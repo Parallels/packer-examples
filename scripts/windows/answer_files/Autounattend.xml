@@ -29,7 +29,7 @@
           <InstallFrom>
             <MetaData wcm:action="add">
               <Key>/IMAGE/NAME</Key>
-              <Value>Windows 11 Professional</Value>
+              <Value>Windows 11 Pro</Value>
             </MetaData>
           </InstallFrom>
           <InstallTo>
@@ -170,6 +170,7 @@
     </component>
     <component name="Microsoft-Windows-Shell-Setup" processorArchitecture="arm64"
       publicKeyToken="31bf3856ad364e35" language="neutral" versionScope="nonSxS">
+      <!-- <ComputerName></ComputerName> -->
       <UserAccounts>
         <AdministratorPassword>
           <Value>vagrant</Value>

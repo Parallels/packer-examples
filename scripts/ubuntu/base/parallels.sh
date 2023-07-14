@@ -1,7 +1,7 @@
 #!/bin/sh -eux
 
 # set a default HOME_DIR environment variable if not set
-HOME_DIR="${HOME_DIR:-/home/ubuntu}";
+HOME_DIR="${HOME_DIR:-/home/$USERNAME}";
 sudo DEBIAN_FRONTEND=noninteractive apt install -y gcc make linux-headers-$(uname -r) dkms
 
 case "$PACKER_BUILDER_TYPE" in
