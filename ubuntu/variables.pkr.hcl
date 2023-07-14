@@ -6,7 +6,7 @@ variable "user" {
   })
   default = {
     username           = "parallels"
-    encrypted_password = "$6$parallels$TmuiKCQ7TlOer2.zN6OtTpQ6XmE8P69xwgfA6e8mRgYBQY3ZA3JHQ8HVJuifbgwcfJZjLWC2muyPlGiDF3c180"
+    encrypted_password = "$6$parallels$tb6hm4RSqzwG3j51DSzdFD7Zw3Fxy/x5aen.Yvud7IfLqarIxMEuuM8efQy0gO.pHhT.lIz9tNYoppTGBGCsB/"
     password           = "parallels"
   }
 }

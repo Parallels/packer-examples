@@ -34,7 +34,6 @@ build {
       "${path.root}/../scripts/ubuntu/base/parallels.sh",
       "${path.root}/../scripts/ubuntu/base/parallels_folders.sh",
       "${path.root}/../scripts/ubuntu/base/minimize.sh",
-      "${path.root}/../scripts/ubuntu/base/password_change.sh",
     ]
 
     execute_command   = "echo 'ubuntu' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
@@ -77,13 +76,28 @@ build {
 
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E bash -eux '{{ .Path }}'"
     expect_disconnect = true
+    timeout           = "3h"
     except            = length(var.addons) > 0 ?  [] : ["parallels-iso.image"]
   }
+
+  provisioner "shell" {
+    environment_vars = [
+      "HOME_DIR=/home/${local.username}",
+      "USERNAME=${local.username}",
+    ]
+    scripts = [
+      "${path.root}/../scripts/ubuntu/base/password_change.sh",
+    ]
+
+    execute_command   = "echo 'ubuntu' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    expect_disconnect = true
+  }
+
 
   post-processor "vagrant" {
     compression_level    = 9
     keep_input_artifact  = false
-    output               = "./out/${local.machine_name}.box"
+    output               = "${path.root}/box/${local.machine_name}.box"
     vagrantfile_template = null
     except                 = !var.create_vagrant_box ?  ["parallels-iso.image"] : []
   }
