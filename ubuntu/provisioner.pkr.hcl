@@ -11,8 +11,8 @@ locals {
   ] : var.isos_urls
 
   iso_checksum = var.iso_checksum == "" ? "file:https://cdimage.ubuntu.com/releases/${var.version}/release/SHA256SUMS" : var.iso_checksum
-  ssh_username = var.ssh_username == "" ? var.user.username : var.ssh_username
-  ssh_password = var.ssh_password == "" ? var.user.password : var.ssh_password
+  ssh_username = var.create_vagrant_box ? "vagrant" : var.ssh_username == "" ? var.user.username : var.ssh_username
+  ssh_password = var.create_vagrant_box ? "vagrant" : var.ssh_password == "" ? var.user.password : var.ssh_password
 
   username = var.create_vagrant_box ? "vagrant" : var.user.username
   password = var.create_vagrant_box ? "vagrant" : var.user.password
