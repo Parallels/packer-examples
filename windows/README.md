@@ -25,9 +25,6 @@ a. Most users will be best served by the Get Windows 11 from Microsoft option to
 
 b. Corporate users can find the image on Microsoft’s Business portal.
 
- 
-Downloading Windows ISO from the Microsoft Business portal
-
 * you will also need to get the file checksum in sha-256, you can get this by running the following command:
 
  ```bash
