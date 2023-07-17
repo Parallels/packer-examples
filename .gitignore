@@ -11,7 +11,7 @@ crash.log
 # subject to change depending on the environment.
 #
 *.pkrvars.hcl
-!variables_TEMPLATE.pkrvars.hcl
+!variables.TEMPLATE.pkrvars.hcl
 
 # For built boxes
 **/*.box
@@ -26,3 +26,6 @@ crash.log
 *.key
 **/test/
 **/box/
+macOs/output*
+macOs/packer-plugin-parallels
+**/*.ipsw
