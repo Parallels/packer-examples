@@ -9,6 +9,12 @@ variable "user" {
   }
 }
 
+variable "output_directory" {
+  type    = string
+  default = "out"
+}
+
+
 variable "machine_name" {
   type    = string
   default = ""

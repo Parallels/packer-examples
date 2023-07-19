@@ -1,4 +1,5 @@
 locals {
+  output_dir = var.output_directory == "" ? "out" : var.output_directory
   username = var.create_vagrant_box ? "vagrant" : var.user.username
   password = var.create_vagrant_box ? "vagrant" : var.user.password
 
@@ -31,7 +32,11 @@ locals {
     "${local.username}<enter><wait2s>", #password
     "i<wait>${local.username} ALL = (ALL) NOPASSWD: ALL",
     "<esc>:wq<enter><wait2s>", #save and quit
-    "sudo /Volumes/Parallels\\ Tools/Install.app/Contents/MacOS/PTIAgent<enter><wait1m>", #install parallels tools and restart
+    "NONINTERACTIVE=1 /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"<enter><wait3m>", #install homebrew
+    "(echo; echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"') >> /Users/parallels/.zprofile<enter><wait5s>",
+    "eval \"$(/opt/homebrew/bin/brew shellenv)\"<enter><wait5s>",
+
+    "sudo /Volumes/Parallels\\ Tools/Install.app/Contents/MacOS/PTIAgent<enter><wait2m>", #install parallels tools and restart
     "<enter><wait5s><enter>"#restart
      ] : var.boot_command
 
@@ -46,14 +51,18 @@ locals {
   sources = [
     var.macvm_path == "" ? "source.parallels-ipsw.image": "source.parallels-macvm.image"
   ]
+    vagrant_sources = [
+    var.macvm_path == "" ? "parallels-ipsw.image": "parallels-macvm.image"
+  ]
 }
 
 source "parallels-ipsw" "image" {
+  output_directory = local.output_dir
   boot_command     = local.boot_command
   boot_wait        = "${var.boot_wait}"
   shutdown_command = "sudo shutdown -h now"
   ipsw_url         = local.ipsw_url
-  ipsw_checksum    = "md5:acd17423a6de261121454513f0a2b814"
+  ipsw_checksum    = local.ipsw_checksum
   ssh_username     = "${local.ssh_username}"
   ssh_password     = "${local.ssh_password}"
   vm_name          = "${local.machine_name}"
@@ -62,6 +71,7 @@ source "parallels-ipsw" "image" {
 }
 
 source "parallels-macvm" "image" {
+  output_directory = local.output_dir
   boot_command     = local.boot_command
   boot_wait        = "${var.boot_wait}"
   shutdown_command = "sudo shutdown -h now"
