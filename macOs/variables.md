@@ -12,7 +12,8 @@ This guide provides detailed explanations of the variables that can be set in th
 
 * `output_directory` - Specifies the directory where the virtual machine files will be saved. 
 * `machine_name` - Defines the name of the virtual machine in Parallels Desktop.
-* `machine_specs` - This variable holds the hardware specifications for the virtual machine:
+* `machine_specs` - This variable holds the hardware specifications for the virtual machine:  
+  > **Note:** This will only be taken into consideration if you are building a macvm and not an ipsw.
   * `cpus` - Sets the number of CPUs to assign to the virtual machine.
   * `memory` - Sets the amount of memory (in MB) to assign to the virtual machine.
 
