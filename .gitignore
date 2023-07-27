@@ -26,6 +26,6 @@ crash.log
 *.key
 **/test/
 **/box/
-macOs/output*
-macOs/packer-plugin-parallels
+macos/output*
+macos/packer-plugin-parallels
 **/*.ipsw

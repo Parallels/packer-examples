@@ -2,7 +2,7 @@ build {
   sources = local.sources
 
     provisioner "file" {
-    source      = "${path.root}/../scripts/macOs/addons"
+    source      = "${path.root}/../scripts/macos/addons"
     destination = "/Users/${local.username}/parallels-tools"
     direction   = "upload"
     except            = length(var.addons) > 0 ?  [] : local.sources
@@ -17,7 +17,7 @@ build {
     ]
       
     scripts = [
-      "${path.root}/../scripts/macOs/addons/install.sh",
+      "${path.root}/../scripts/macos/addons/install.sh",
     ]
 
     execute_command   = "echo '${local.username}' | {{ .Vars }} bash -eux '{{ .Path }}'"

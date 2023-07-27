@@ -36,28 +36,28 @@ Here is a brief overview of the repository's structure:
 ├── README.md
 ├── http
 ├── scripts
-│   ├── macOs
+│   ├── macos
 │   │   └── addons
 │   ├── ubuntu
 │   │   └── addons
 │   └── windows
 │       └── addons
-├── macOs
+├── macos
 ├── ubuntu
 └── windows
 ```
 
 * `http` - This directory holds files served by the web server during the VM installation process.
 * `scripts` - This directory contains scripts executed during the VM installation.
-  * `macOs`, `ubuntu`, `windows` - These directories hold Packer scripts for the respective operating systems.
+  * `macos`, `ubuntu`, `windows` - These directories hold Packer scripts for the respective operating systems.
     * `addons` - This directory comprises scripts for installing additional features.
-* `macOs`, `ubuntu`, `windows` - These directories contain Packer scripts for their respective operating systems.
+* `macos`, `ubuntu`, `windows` - These directories contain Packer scripts for their respective operating systems.
 
 ## Instructions
 
 Each operating system has its own dedicated directory. For detailed instructions on how to use the scripts for each OS, refer to the README files provided:
 
-* [macOS](macOs/README.md)
+* [macOS](macos/README.md)
 * [Ubuntu](ubuntu/README.md)
 * [Windows 11](windows/README.md)
 
