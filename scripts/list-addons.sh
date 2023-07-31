@@ -12,18 +12,24 @@ fi
 # Check if the folder exists
 if [ ! -d "$folder" ]; then
   exit 0
-
 fi
 
-for file in $(find $folder -name "*.name"); do
-# BEGIN: 5d8f5a6b3c4e
-if [ -f "$file" ]; then
-  name=$(basename "$file" .name)
-  ext=$(echo "$file" | sed 's/.*\.//')
-  if [ -n "$(find "$folder" -maxdepth 1 -type f -name "$name.*" -not -name "$name.$ext")" ]; then
-      echo "$(cat "$file" | head -n 1)"
+files=$(find $folder -name "*.name")
+last_file=$(echo "$files" | tail -n 1)
+
+printf "[\n"
+for file in $files; do
+  if [ -f "$file" ]; then
+    name=$(basename "$file" .name)
+    ext=$(echo "$file" | sed 's/.*\.//')
+    if [ -n "$(find "$folder" -maxdepth 1 -type f -name "$name.*" -not -name "$name.$ext")" ]; then
+      printf "  { \n    \"code\": \"$name\",\n    \"name\": \"$(cat "$file" | head -n 1)\"\n  }"
+      if [ "$file" != "$last_file" ]; then
+        printf ",\n"
+      else
+        printf "\n"
+      fi
+    fi
   fi
-fi
-# END: 5d8f5a6b3c4e
-
 done
+printf "]\n"
