@@ -2,12 +2,7 @@
 
 # Get the first argument
 distro=$1
-
-if [ "$distro" == "windows" ]; then
-  folder="./$distro/addons/choco/scripts"
-else
-  folder="./$distro/addons/scripts"
-fi
+folder="./$distro/addons/scripts"
 
 # Check if the folder exists
 if [ ! -d "$folder" ]; then
