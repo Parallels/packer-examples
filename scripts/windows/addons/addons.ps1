@@ -3,7 +3,7 @@ param(
   [string]$ScriptNames
 )
 
-$basePath = "c:/parallels-tools/addons/choco"
+$basePath = "c:/parallels-tools/addons"
 
 if ($ScriptNames -eq "*") {
   $scriptNamesArray = Get-ChildItem -Path "$PSScriptRoot/scripts" -Filter *.ps1 | Select-Object -ExpandProperty Name
