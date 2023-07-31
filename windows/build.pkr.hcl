@@ -32,7 +32,7 @@ build {
 
   provisioner "powershell" {
     inline = [
-      "powershell -NoLogo -ExecutionPolicy RemoteSigned -File \"c:\\parallels-tools\\addons\\choco\\addons.ps1\" ${local.addons}"
+      "powershell -NoLogo -ExecutionPolicy RemoteSigned -File \"c:\\parallels-tools\\addons\\addons.ps1\" ${local.addons}"
     ]
 
     elevated_password = "vagrant"
