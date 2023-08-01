@@ -30,7 +30,7 @@ build {
   post-processor "vagrant" {
     compression_level    = 9
     keep_input_artifact  = false
-    output               = "${path.root}/box/${local.machine_name}.box"
+    output               = local.vagrant_output_dir
     vagrantfile_template = null
     except               = !var.create_vagrant_box ? local.vagrant_sources : []
   }
