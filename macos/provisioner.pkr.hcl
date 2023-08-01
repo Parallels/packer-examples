@@ -1,5 +1,6 @@
 locals {
   output_dir = var.output_directory == "" ? "out" : var.output_directory
+  vagrant_output_dir = var.output_directory == "" ? "${path.root}/box/${local.machine_name}.box": "${var.output_directory}/box/${local.machine_name}.box"
   username = var.create_vagrant_box ? "vagrant" : var.user.username
   password = var.create_vagrant_box ? "vagrant" : var.user.password
 

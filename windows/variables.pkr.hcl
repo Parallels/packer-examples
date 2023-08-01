@@ -53,3 +53,8 @@ variable "create_vagrant_box" {
   type    = bool
   default = false
 }
+
+variable "output_directory" {
+  type    = string
+  default = ""
+}
