@@ -1,4 +1,7 @@
 locals {
+  output_dir = var.output_directory == "" ? "out" : var.output_directory
+    vagrant_output_dir = var.output_directory == "" ? "${path.root}/box/${local.machine_name}.box": "${var.output_directory}/box/${local.machine_name}.box"
+
   version  = replace(var.version, ".", "_")
   hostname = var.hostname == "" ? "ubuntu_${local.version}" : var.hostname
 
@@ -46,7 +49,7 @@ source "parallels-iso" "image" {
   }
 
   iso_urls         = local.isos_urls
-  output_directory = "out"
+  output_directory = local.output_dir
   shutdown_command = "echo '${local.username}'|sudo -S shutdown -P now"
   shutdown_timeout = var.shutdown_timeout
   ssh_port         = var.ssh_port

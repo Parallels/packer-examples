@@ -1,4 +1,7 @@
 locals {
+  output_dir = var.output_directory == "" ? "out" : var.output_directory
+    vagrant_output_dir = var.output_directory == "" ? "${path.root}/box/${local.machine_name}.box": "${var.output_directory}/box/${local.machine_name}.box"
+
   boot_command = length(var.boot_command) == 0 ? [
     "<wait>"
   ] : var.boot_command
@@ -26,7 +29,7 @@ source "parallels-iso" "image" {
   communicator              = "ssh"
   iso_checksum              = var.iso_checksum
   iso_url                   = var.iso_url
-  output_directory          = "out"
+  output_directory          = local.output_dir
   shutdown_command          = "shutdown /s /t 10 /f /d p:4:1 /c \"Packer Shutdown\""
   shutdown_timeout          = var.shutdown_timeout
   winrm_username            = "vagrant"
