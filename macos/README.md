@@ -89,7 +89,7 @@ $ The configuration is valid.
 To initiate the build of the virtual machine, execute the following command in the directory with the script:
 
 ```bash
-$ packer build . -var-file variables.local.pkrvars.hcl
+$ packer build -var-file variables.local.pkrvars.hcl .
 ```
 
 This action will generate a new virtual machine as per the settings in the Packer script, placing it in the `out` directory. If the `create_vagrant_box` variable is set to `true`, a Vagrant box will also be generated in the `out` folder.
