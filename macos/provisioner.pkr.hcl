@@ -8,7 +8,7 @@ locals {
     "<wait><enter><wait2s><enter><wait20s>",              # Wait for boot
     "<leftShiftOn><tab><leftShiftOff><spacebar><wait5s>", # Select country
     "<leftShiftOn><tab><leftShiftOff><spacebar><wait1s>", #Select language
-    "<leftShiftOn><tab><leftShiftOff><spacebar><wait2s>", #Accessibility
+    "<leftShiftOn><tab><leftShiftOff><spacebar><wait30s>", #Accessibility
     "<leftShiftOn><tab><leftShiftOff><spacebar><wait2s>", #Data and Privacy
     "<tab><tab><tab><spacebar><wait2s>",                  #Migration assistant
     "<leftShiftOn><tab><tab><leftShiftOff><spacebar><wait2s><tab><spacebar><wait5s>",
