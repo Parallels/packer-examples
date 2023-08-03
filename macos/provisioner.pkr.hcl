@@ -50,7 +50,7 @@ locals {
   machine_name = var.machine_name == "" ? "macOs-13.4.1" : var.machine_name
   addons       = join(",", var.addons)
   sources = [
-    var.macvm_path == "" ? "source.parallels-ipsw.image": "source.parallels-macvm.image"
+    var.macvm_path == "" ? "parallels-ipsw.image": "parallels-macvm.image"
   ]
     vagrant_sources = [
     var.macvm_path == "" ? "parallels-ipsw.image": "parallels-macvm.image"

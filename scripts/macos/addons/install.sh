@@ -2,17 +2,11 @@
 
 echo "$ADDONS_DIR"
 echo "$ADDONS"
-echo "Listing tmp folder"
-ls -la /tmp
-echo "Listing addons folder"
-ls -la "$ADDONS_DIR"
-echo "Listing script folder"
-ls -la "$ADDONS_DIR/scripts"
 
 # Check if an argument was provided
 if [ -z "$ADDONS" ]; then
-  echo "Please provide a comma-separated list of values"
-  exit 1
+  echo "No addons provided, skipping..."
+  exit 0
 fi
 
 # Convert the argument to an array
