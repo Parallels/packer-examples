@@ -49,9 +49,9 @@ variable "boot_wait" {
   default = "10s"
 }
 
-variable "isos_urls" {
+variable "iso_url" {
   type    = list(string)
-  default = []
+  default = ""
 }
 
 variable "iso_checksum" {
