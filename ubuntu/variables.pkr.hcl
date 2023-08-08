@@ -103,3 +103,8 @@ variable "output_directory" {
   type    = string
   default = ""
 }
+
+variable "output_vagrant_directory" {
+  type    = string
+  default = ""
+}
