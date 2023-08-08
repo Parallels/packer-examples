@@ -50,7 +50,7 @@ variable "boot_wait" {
 }
 
 variable "iso_url" {
-  type    = list(string)
+  type    = string
   default = ""
 }
 
