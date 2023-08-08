@@ -9,9 +9,9 @@ locals {
     "<wait>e<wait><down><down><down><end><wait> autoinstall ds=nocloud-net\\;s=http://{{.HTTPIP}}:{{.HTTPPort}}/ubuntu/<f10><wait>"
   ] : var.boot_command
 
-  isos_urls = length(var.isos_urls) == 0 ? [
+  isos_urls = var.iso_url == "" ? [
     "https://releases.ubuntu.com/${var.version}/ubuntu-${var.version}-live-server-arm64.iso"
-  ] : var.isos_urls
+  ] : [ var.iso_url ]
 
   iso_checksum = var.iso_checksum == "" ? "file:https://cdimage.ubuntu.com/releases/${var.version}/release/SHA256SUMS" : var.iso_checksum
   ssh_username = var.create_vagrant_box ? "vagrant" : var.ssh_username == "" ? var.user.username : var.ssh_username

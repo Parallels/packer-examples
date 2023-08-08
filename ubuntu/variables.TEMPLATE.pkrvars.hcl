@@ -11,7 +11,7 @@ machine_specs = {
   memory = 2048,
   disk_size = "65536",
 }
-isos_urls = []
+iso_url = ""
 iso_checksum = ""
 addons=[
   "desktop"
