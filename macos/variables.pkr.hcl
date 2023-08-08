@@ -14,6 +14,10 @@ variable "output_directory" {
   default = "out"
 }
 
+variable "output_vagrant_directory" {
+  type    = string
+  default = ""
+}
 
 variable "machine_name" {
   type    = string
@@ -75,3 +79,4 @@ variable "create_vagrant_box" {
   type    = bool
   default = false
 }
+
