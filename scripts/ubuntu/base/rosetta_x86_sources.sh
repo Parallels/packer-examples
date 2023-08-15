@@ -14,6 +14,8 @@ if [ ! -f "$FILENAME" ]; then
   exit 1
 fi
 
+echo $ACTION
+
 cp "$FILENAME" "${2}_$(date +%Y%m%d%H%M%S)"
 
 if [ $ACTION == "enable" ]; then
