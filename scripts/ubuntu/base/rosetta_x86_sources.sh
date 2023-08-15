@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ACTION="enable"
-if [ -z "$1" ]; then
-  ACTION="enable"
+if [ "$1" ]; then
+  ACTION=$1
 fi
 
 if [ -z "$2" ]; then
