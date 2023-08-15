@@ -1,8 +1,8 @@
 #!/bin/bash
 
+ACTION="enable"
 if [ -z "$1" ]; then
-  echo "Please provide an operation [enable|disable] as an argument"
-  exit 1
+  $ACTION="enable"
 fi
 
 if [ -z "$2" ]; then
