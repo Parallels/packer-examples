@@ -2,7 +2,7 @@
 
 ACTION="enable"
 if [ -z "$1" ]; then
-  $ACTION="enable"
+  ACTION="enable"
 fi
 
 if [ -z "$2" ]; then
