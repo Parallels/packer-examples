@@ -16,7 +16,7 @@ fi
 
 cp "$FILENAME" "${2}_$(date +%Y%m%d%H%M%S)"
 
-if [ "$1" == "enable" ]; then
+if [ $ACTION == "enable" ]; then
   while read -r line || [[ -n "$line" ]]; do
     if [[ $line == deb* && $line != *"deb-src"* && $line != *"[arch=arm64]"* && $line == *"ports.ubuntu"* ]]; then
       line="deb [arch=arm64] ${line#deb}"
