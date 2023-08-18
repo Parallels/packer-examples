@@ -36,8 +36,8 @@ install() {
   sudo DEBIAN_FRONTEND=noninteractive apt install -y code
   sudo DEBIAN_FRONTEND=noninteractive apt autoremove -y
 
-  echo "Installing Visual Studio Code service"
-  install_service
+  # echo "Installing Visual Studio Code service"
+  # install_service
 }
 
 # Starting script
