@@ -6,6 +6,8 @@ if [ -z "$ADDONS" ]; then
   exit 1
 fi
 
+echo "Installing addons: $ADDONS"
+
 # Convert the argument to an array
 IFS=',' read -ra values <<<"$ADDONS"
 
