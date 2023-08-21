@@ -87,6 +87,7 @@ build {
     ]
     scripts = [
       "${path.root}/../scripts/ubuntu/base/password_change.sh",
+      "${path.root}/../scripts/ubuntu/base/clean_user_snap_folder.sh",
     ]
 
     execute_command   = "echo 'ubuntu' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
