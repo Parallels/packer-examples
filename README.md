@@ -7,7 +7,7 @@ Welcome to our repository containing a collection of Packer scripts intended for
 To begin, simply clone this repository onto your local machine with the following command:
 
 ```bash
-git clone https://github.com/Parallels/parallels-packer-examples.git
+git clone https://github.com/Parallels/packer-examples.git
 ```
 
 ## Pre-Installation
