@@ -85,10 +85,12 @@ configure_swapfile() {
     printf "/swapfile none swap sw 0 0\n" >> /etc/fstab
 }
 
-enable_ssh() {
+configure_swapfile
+
+install_ssh() {
     sudo apt install ssh -y
     sudo systemctl enable ssh.service
     sudo systemctl start ssh
 }
 
-configure_swapfile
+install_ssh
