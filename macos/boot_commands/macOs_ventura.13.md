@@ -28,7 +28,7 @@ This is the key sentence to boot the Mac OS Ventura 13 for an automated installa
 "",
 "<leftSuperOn><spacebar><leftSuperOff>terminal<enter><wait10s>", #open terminal
 "sudo visudo /private/etc/sudoers.d/${local.username}<enter><wait2s>", #open vim
-"${local.username}<enter><wait2s>", #password
+"${local.password}<enter><wait2s>", #password
 "i<wait>${local.username} ALL = (ALL) NOPASSWD: ALL",
 "<esc>:wq<enter><wait2s>", #save and quit
 "NONINTERACTIVE=1 /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"<enter><wait3m>", #install homebrew
