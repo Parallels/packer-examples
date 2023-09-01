@@ -22,7 +22,7 @@ Should you wish to use an IPSW other than the default (macOS 13.4.1), you'll nee
 If you opt for an alternate IPSW, you'll need to determine and define its checksum. Use the following command to calculate the checksum:
 
 ```bash
-$ shasum -a 256 <path_to_ipsw>
+shasum -a 256 <path_to_ipsw>
 ```
 
 You can then specify the resulting checksum in the `variables.pkrvars.hcl` file as follows:
@@ -75,13 +75,13 @@ Refer to the detailed [variables guide](./VARIABLES.md) for information on each 
 Validate the build configuration with the following command in the directory containing the script:
 
 ```bash
-$ packer validate -var-file variables.local.pkrvars.hcl .
+packer validate -var-file variables.local.pkrvars.hcl .
 ```
 
 A successful validation will yield the output:
 
 ```bash
-$ The configuration is valid.
+The configuration is valid.
 ```
 
 #### Build Machine
@@ -89,11 +89,10 @@ $ The configuration is valid.
 To initiate the build of the virtual machine, execute the following command in the directory with the script:
 
 ```bash
-$ packer build -var-file variables.local.pkrvars.hcl .
+packer build -var-file variables.local.pkrvars.hcl .
 ```
 
 This action will generate a new virtual machine as per the settings in the Packer script, placing it in the `out` directory. If the `create_vagrant_box` variable is set to `true`, a Vagrant box will also be generated in the `out` folder.
 
 > **Note:** The build process duration depends on your machine's capabilities and internet connection speed.  
-
 > Post-build, the machine will not auto-attach to Parallels Desktop. This has to be performed manually.
