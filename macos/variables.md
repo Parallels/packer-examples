@@ -1,6 +1,6 @@
 # Variables Guide
 
-This guide provides detailed explanations of the variables that can be set in the `variables.pkrvars.hcl` file for the macOS Virtual Machine Builder. 
+This guide provides detailed explanations of the variables that can be set in the `variables.pkrvars.hcl` file for the macOS Virtual Machine Builder.
 
 ## User Variables
 
@@ -10,7 +10,7 @@ This guide provides detailed explanations of the variables that can be set in th
 
 ## Machine Settings
 
-* `output_directory` - Specifies the directory where the virtual machine files will be saved. 
+* `output_directory` - Specifies the directory where the virtual machine files will be saved.
 * `machine_name` - Defines the name of the virtual machine in Parallels Desktop.
 * `machine_specs` - This variable holds the hardware specifications for the virtual machine:  
   > **Note:** This will only be taken into consideration if you are building a macvm and not an ipsw.
