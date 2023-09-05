@@ -133,4 +133,5 @@ d-i preseed/late_command string \
     in-target curl -L -o /root/post-install.sh "https://raw.githubusercontent.com/Parallels/packer-examples/main/http/kali/post-install.sh"; \
     in-target chmod +x /root/post-install.sh; \
     in-target /root/post-install.sh; \
+    sudo hostname ${hostname}; \
     echo "${username} ALL=(ALL:ALL) NOPASSWD:ALL" > /target/etc/sudoers.d/${username} && chmod 0440 /target/etc/sudoers.d/${username}

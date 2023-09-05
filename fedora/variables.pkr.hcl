@@ -94,7 +94,7 @@ variable "ssh_wait_timeout" {
 }
 
 variable "addons" {
-  type = list(string)
+  type    = list(string)
   default = []
 }
 

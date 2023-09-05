@@ -13,7 +13,7 @@ variable "user" {
 
 variable "version" {
   type    = string
-  default = "2023.3"
+  default = "5.3"
 }
 
 variable "machine_name" {
@@ -27,7 +27,7 @@ variable "hostname" {
 }
 variable "desktop" {
   type    = string
-  default = "xfce"
+  default = "gnome"
 }
 
 variable "machine_specs" {
@@ -94,7 +94,7 @@ variable "ssh_wait_timeout" {
 }
 
 variable "addons" {
-  type = list(string)
+  type    = list(string)
   default = []
 }
 

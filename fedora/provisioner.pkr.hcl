@@ -3,28 +3,18 @@ locals {
   vagrant_output_dir = var.output_vagrant_directory == "" ? "${path.root}/box/${local.machine_name}.box" : "${var.output_vagrant_directory}/box/${local.machine_name}.box"
 
   version  = replace(var.version, ".", "_")
-  hostname = var.hostname == "" ? "parrot_${local.version}" : var.hostname
-
-  desktop = var.desktop == "" ? "gnome-desktop" : var.desktop == "gnome" ? "gnome-desktop" : var.desktop == "xfce" ? "xfce-desktop" : "gnome-desktop"
+  hostname = var.hostname == "" ? "kali_${local.version}" : var.hostname
 
   boot_command = length(var.boot_command) == 0 ? [
-    "<wait><down>e<wait><down><down><down><end><wait>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<bs>",
-    "auto=true url=http://{{.HTTPIP}}:{{.HTTPPort}}/parrot-os/preseed.cfg priority=critical<f10><wait>"
+    "<wait>",
+    "<up>e<wait>",
+    // "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+    "<down><down><end> inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/fedora/ks.cfg<F10><wait>"
   ] : var.boot_command
 
-  iso_url = var.iso_url == "" ? "https://deb.parrot.sh/parrot/iso/5.3/Parrot-architect-5.3_arm64.iso" : var.iso_url
+  iso_url = var.iso_url == "" ? "https://download.fedoraproject.org/pub/fedora/linux/releases/38/Server/aarch64/iso/Fedora-Server-dvd-aarch64-38-1.6.iso" : var.iso_url
 
-  iso_checksum = var.iso_checksum == "" ? "sha256:fdf76024b94e0b15294b8ee404b9d2e85a60207d3a484c86a5d8bb7161fcc1d8" : var.iso_checksum
+  iso_checksum = var.iso_checksum == "" ? "file:https://download.fedoraproject.org/pub/fedora/linux/releases/38/Server/aarch64/iso/Fedora-Server-38-1.6-aarch64-CHECKSUM" : var.iso_checksum
   ssh_username = var.create_vagrant_box ? "vagrant" : var.ssh_username == "" ? var.user.username : var.ssh_username
   ssh_password = var.create_vagrant_box ? "vagrant" : var.ssh_password == "" ? var.user.password : var.ssh_password
 
@@ -32,12 +22,12 @@ locals {
   password           = var.create_vagrant_box ? "vagrant" : var.user.password
   encrypted_password = var.create_vagrant_box ? "$6$parallels$VXyp.NunfN8bTmRtTNYSOrWE7KHIbHrc02A/N1oQ9dpJY4xB9KQjYEp7ZL53hzGne0QpZJK7Iqs99dQ/qeb3R." : var.user.encrypted_password
 
-  machine_name = var.machine_name == "" ? "parrot-os-${replace(local.version, ".", "_")}" : var.machine_name
+  machine_name = var.machine_name == "" ? "kali-${local.version}" : var.machine_name
   addons       = join(",", var.addons)
 }
 
 source "parallels-iso" "image" {
-  guest_os_type          = "linux"
+  guest_os_type          = "fedora-core"
   parallels_tools_flavor = "lin-arm"
   parallels_tools_mode   = "upload"
   prlctl = [
@@ -53,8 +43,7 @@ source "parallels-iso" "image" {
   floppy_files        = null
   iso_checksum        = local.iso_checksum
   http_content = {
-    "/parrot-os/meta-data"   = templatefile("${path.root}/../http/parrot-os/meta-data.pkrtpl.hcl", { hostname = "${local.hostname}" })
-    "/parrot-os/preseed.cfg" = templatefile("${path.root}/../http/parrot-os/preseed.cfg.pkrtpl.hcl", { username = "${local.username}", password = "${local.password}", hostname = "${local.hostname}", desktop = "${local.desktop}" })
+    "/fedora/ks.cfg" = templatefile("${path.root}/../http/fedora/ks.cfg.pkrtpl.hcl", { username = "${local.username}", password = "${local.password}", hostname = "${local.hostname}" })
   }
 
   iso_url          = local.iso_url

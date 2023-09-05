@@ -59,7 +59,7 @@ build {
     source      = "${path.root}/../scripts/ubuntu/addons"
     destination = "/parallels-tools"
     direction   = "upload"
-    except            = length(var.addons) > 0 ?  [] : ["parallels-iso.image"]
+    except      = length(var.addons) > 0 ? [] : ["parallels-iso.image"]
   }
 
   provisioner "shell" {
@@ -69,7 +69,7 @@ build {
       "ADDONS=${local.addons}",
       "ADDONS_DIR=/parallels-tools/addons"
     ]
-      
+
     scripts = [
       "${path.root}/../scripts/ubuntu/addons/install.sh",
     ]
@@ -77,7 +77,7 @@ build {
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E bash -eux '{{ .Path }}'"
     expect_disconnect = true
     timeout           = "3h"
-    except            = length(var.addons) > 0 ?  [] : ["parallels-iso.image"]
+    except            = length(var.addons) > 0 ? [] : ["parallels-iso.image"]
   }
 
   provisioner "shell" {
@@ -100,6 +100,6 @@ build {
     keep_input_artifact  = false
     output               = local.vagrant_output_dir
     vagrantfile_template = null
-    except                 = !var.create_vagrant_box ?  ["parallels-iso.image"] : []
+    except               = !var.create_vagrant_box ? ["parallels-iso.image"] : []
   }
 }

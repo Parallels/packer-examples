@@ -1,11 +1,11 @@
 build {
   sources = local.sources
 
-    provisioner "file" {
+  provisioner "file" {
     source      = "${path.root}/../scripts/macos/addons"
     destination = "/Users/${local.username}/parallels-tools"
     direction   = "upload"
-    except            = length(var.addons) > 0 ?  [] : local.sources
+    except      = length(var.addons) > 0 ? [] : local.sources
   }
 
   provisioner "shell" {
@@ -15,7 +15,7 @@ build {
       "ADDONS=${local.addons}",
       "ADDONS_DIR=/Users/${local.username}/parallels-tools"
     ]
-      
+
     scripts = [
       "${path.root}/../scripts/macos/addons/install.sh",
     ]
@@ -23,7 +23,7 @@ build {
     execute_command   = "echo '${local.username}' | {{ .Vars }} bash -eux '{{ .Path }}'"
     expect_disconnect = true
     timeout           = "3h"
-    except            = length(var.addons) > 0 ?  [] : local.sources
+    except            = length(var.addons) > 0 ? [] : local.sources
   }
 
 

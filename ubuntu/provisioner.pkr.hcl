@@ -1,6 +1,6 @@
 locals {
-  output_dir = var.output_directory == "" ? "out" : var.output_directory
-    vagrant_output_dir = var.output_vagrant_directory == "" ? "${path.root}/box/${local.machine_name}.box": "${var.output_vagrant_directory}/box/${local.machine_name}.box"
+  output_dir         = var.output_directory == "" ? "out" : var.output_directory
+  vagrant_output_dir = var.output_vagrant_directory == "" ? "${path.root}/box/${local.machine_name}.box" : "${var.output_vagrant_directory}/box/${local.machine_name}.box"
 
   version  = replace(var.version, ".", "_")
   hostname = var.hostname == "" ? "ubuntu_${local.version}" : var.hostname
@@ -11,18 +11,18 @@ locals {
 
   isos_urls = var.iso_url == "" ? [
     "https://releases.ubuntu.com/${var.version}/ubuntu-${var.version}-live-server-arm64.iso"
-  ] : [ var.iso_url ]
+  ] : [var.iso_url]
 
   iso_checksum = var.iso_checksum == "" ? "file:https://cdimage.ubuntu.com/releases/${var.version}/release/SHA256SUMS" : var.iso_checksum
   ssh_username = var.create_vagrant_box ? "vagrant" : var.ssh_username == "" ? var.user.username : var.ssh_username
   ssh_password = var.create_vagrant_box ? "vagrant" : var.ssh_password == "" ? var.user.password : var.ssh_password
 
-  username = var.create_vagrant_box ? "vagrant" : var.user.username
-  password = var.create_vagrant_box ? "vagrant" : var.user.password
+  username           = var.create_vagrant_box ? "vagrant" : var.user.username
+  password           = var.create_vagrant_box ? "vagrant" : var.user.password
   encrypted_password = var.create_vagrant_box ? "$6$parallels$VXyp.NunfN8bTmRtTNYSOrWE7KHIbHrc02A/N1oQ9dpJY4xB9KQjYEp7ZL53hzGne0QpZJK7Iqs99dQ/qeb3R." : var.user.encrypted_password
 
   machine_name = var.machine_name == "" ? "ubuntu-${local.version}" : var.machine_name
-  addons = join(",", var.addons)
+  addons       = join(",", var.addons)
 }
 
 source "parallels-iso" "image" {
