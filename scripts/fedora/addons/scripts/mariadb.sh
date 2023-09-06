@@ -3,7 +3,7 @@
 install() {
   echo "Installing MariaDB"
   sudo dnf update
-  sudo dnf install mariadb-server
+  sudo dnf -y install mariadb-server
   sudo systemctl start mariadb
   sudo systemctl enable mariadb
 }
