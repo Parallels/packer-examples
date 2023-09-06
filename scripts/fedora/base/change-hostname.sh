@@ -1,3 +1,3 @@
 #!/bin/sh -eux
 
-sudo hostname $HOSTNAME
+sudo hostnamectl set-hostname --static $HOSTNAME

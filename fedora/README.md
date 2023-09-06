@@ -1,10 +1,10 @@
-# Automated ParrotOS Virtual Machine Builder with Packer and Vagrant for Apple Silicon Macs & Parallels Desktop
+# Automated Fedora Virtual Machine Builder with Packer and Vagrant for Apple Silicon Macs & Parallels Desktop
 
-Create virtual ParrotOS machines or Vagrant boxes in an automated, customizable fashion using Packer. This tool is designed specifically for Macs with Apple Silicon chip and leverages Parallels Desktop.
+Create virtual Fedora machines or Vagrant boxes in an automated, customizable fashion using Packer. This tool is designed specifically for Macs with Apple Silicon chip and leverages Parallels Desktop.
 
 ## Overview
 
-This project provides automated Packer scripts to build ParrotOS virtual machines or Vagrant boxes. It offers the flexibility to use any of the available ISO's for the distro. The selected source can be defined by setting the `iso_url` variable in the `variables.pkrvars.hcl` file. By default, the script will use and auto-download the ISO for ParrotOS 2023.3 if no source is specified in the `variables.pkrvars.hcl` file.
+This project provides automated Packer scripts to build Fedora virtual machines or Vagrant boxes. It offers the flexibility to use any of the available ISO's for the distro. The selected source can be defined by setting the `iso_url` variable in the `variables.pkrvars.hcl` file. By default, the script will use and auto-download the ISO for Fedora 2023.3 if no source is specified in the `variables.pkrvars.hcl` file.
 
 ## Prerequisites
 
@@ -44,8 +44,8 @@ Prior to utilizing the Packer script, you must first establish the required vari
 You can set the following variables:
 
 ```hcl
-version="5.3"
-machine_name="parrot_os_architect_5.3"
+version="38"
+machine_name="Fedora Server 38"
 hostname="parrot_os-2023"
 machine_specs = {
   cpus = 2,

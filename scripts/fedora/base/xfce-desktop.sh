@@ -1,4 +1,4 @@
 #!/bin/sh -eux
 
-dnf install @xfce-desktop -y
+dnf -y group install "Basic Desktop" xfce-desktop
 systemctl set-default graphical.target

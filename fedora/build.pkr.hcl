@@ -17,12 +17,57 @@ build {
       "${path.root}/../scripts/fedora/base/parallels_folders.sh",
       "${path.root}/../scripts/fedora/base/cleanup.sh",
       "${path.root}/../scripts/fedora/base/change-hostname.sh",
-      "${path.root}/../scripts/fedora/base/budgie-desktop.sh",
     ]
 
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
     expect_disconnect = true
   }
+
+    provisioner "shell" {
+    environment_vars = [
+      "HOME_DIR=/home/${local.username}",
+      "DEFAULT_USERNAME=${local.username}",
+      "HOSTNAME=${local.hostname}",
+    ]
+    scripts = [
+      "${path.root}/../scripts/fedora/base/budgie-desktop.sh",
+    ]
+
+    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    expect_disconnect = true
+    except            = var.desktop != "budgie" ? ["parallels-iso.image"] : []
+  }
+
+    provisioner "shell" {
+    environment_vars = [
+      "HOME_DIR=/home/${local.username}",
+      "DEFAULT_USERNAME=${local.username}",
+      "HOSTNAME=${local.hostname}",
+    ]
+    scripts = [
+      "${path.root}/../scripts/fedora/base/gnome-desktop.sh",
+    ]
+
+    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    expect_disconnect = true
+    except            = var.desktop != "gnome" ? ["parallels-iso.image"] : []
+  }
+
+      provisioner "shell" {
+    environment_vars = [
+      "HOME_DIR=/home/${local.username}",
+      "DEFAULT_USERNAME=${local.username}",
+      "HOSTNAME=${local.hostname}",
+    ]
+    scripts = [
+      "${path.root}/../scripts/fedora/base/xfce-desktop.sh",
+    ]
+
+    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    expect_disconnect = true
+    except            = var.desktop != "xfce" ? ["parallels-iso.image"] : []
+  }
+
 
   // provisioner "shell" {
   //   environment_vars = [

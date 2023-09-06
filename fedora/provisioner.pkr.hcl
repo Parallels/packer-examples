@@ -3,7 +3,7 @@ locals {
   vagrant_output_dir = var.output_vagrant_directory == "" ? "${path.root}/box/${local.machine_name}.box" : "${var.output_vagrant_directory}/box/${local.machine_name}.box"
 
   version  = replace(var.version, ".", "_")
-  hostname = var.hostname == "" ? "kali_${local.version}" : var.hostname
+  hostname = var.hostname == "" ? "fedora_${local.version}" : var.hostname
 
   boot_command = length(var.boot_command) == 0 ? [
     "<wait>",
@@ -22,7 +22,7 @@ locals {
   password           = var.create_vagrant_box ? "vagrant" : var.user.password
   encrypted_password = var.create_vagrant_box ? "$6$parallels$VXyp.NunfN8bTmRtTNYSOrWE7KHIbHrc02A/N1oQ9dpJY4xB9KQjYEp7ZL53hzGne0QpZJK7Iqs99dQ/qeb3R." : var.user.encrypted_password
 
-  machine_name = var.machine_name == "" ? "kali-${local.version}" : var.machine_name
+  machine_name = var.machine_name == "" ? "Fedora Server ${local.version}" : var.machine_name
   addons       = join(",", var.addons)
 }
 

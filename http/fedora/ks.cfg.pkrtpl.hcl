@@ -38,4 +38,5 @@ dkms
 echo 'Defaults:${username} !requiretty' > /etc/sudoers.d/${username}
 echo '%${username} ALL=(ALL) NOPASSWD: ALL' >> /etc/sudoers.d/${username}
 chmod 440 /etc/sudoers.d/${username}
+
 %end
