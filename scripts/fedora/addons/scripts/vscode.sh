@@ -13,7 +13,7 @@ gpgcheck=1
 gpgkey=https://packages.microsoft.com/keys/microsoft.asc
 EOF
   sudo dnf check-update
-  sudo dnf install code
+  sudo dnf -y install code
 }
 
 # Starting script
