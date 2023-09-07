@@ -5,51 +5,37 @@ build {
 
   provisioner "shell" {
     environment_vars = [
-      "HOME_DIR=/home/${local.username}",
-      "DEFAULT_USERNAME=${local.username}",
-      "HOSTNAME=${local.hostname}",
+      "REDHAT_USERNAME=${var.redhat_username}",
+      "REDHAT_PASSWORD=${var.redhat_password}",
     ]
+
     scripts = [
-      "${path.root}/../scripts/fedora/base/init.sh",
-      "${path.root}/../scripts/fedora/base/sshd.sh",
-      "${path.root}/../scripts/fedora/base/parallels.sh",
-      "${path.root}/../scripts/fedora/base/parallels_folders.sh",
-      "${path.root}/../scripts/fedora/base/cleanup.sh",
-      "${path.root}/../scripts/fedora/base/change-hostname.sh",
+      "${path.root}/../scripts/rhel/base/subscribe.sh",
     ]
 
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
     expect_disconnect = true
+    except            = var.redhat_username == "" || var.redhat_password == "" ? ["parallels-iso.image"] : []
   }
 
-    provisioner "shell" {
+  provisioner "shell" {
     environment_vars = [
       "HOME_DIR=/home/${local.username}",
       "DEFAULT_USERNAME=${local.username}",
       "HOSTNAME=${local.hostname}",
     ]
     scripts = [
-      "${path.root}/../scripts/fedora/base/budgie-desktop.sh",
+      "${path.root}/../scripts/rhel/base/init.sh",
+      "${path.root}/../scripts/rhel/base/sshd.sh",
+      "${path.root}/../scripts/rhel/base/parallels.sh",
+      "${path.root}/../scripts/rhel/base/parallels_folders.sh",
+      "${path.root}/../scripts/rhel/base/cleanup.sh",
+      "${path.root}/../scripts/rhel/base/change-hostname.sh",
     ]
 
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    except            = var.redhat_username == "" || var.redhat_password == "" ? ["parallels-iso.image"] : []
     expect_disconnect = true
-    except            = var.desktop != "budgie" ? ["parallels-iso.image"] : []
-  }
-
-    provisioner "shell" {
-    environment_vars = [
-      "HOME_DIR=/home/${local.username}",
-      "DEFAULT_USERNAME=${local.username}",
-      "HOSTNAME=${local.hostname}",
-    ]
-    scripts = [
-      "${path.root}/../scripts/fedora/base/gnome-desktop.sh",
-    ]
-
-    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
-    expect_disconnect = true
-    except            = var.desktop != "gnome" ? ["parallels-iso.image"] : []
   }
 
       provisioner "shell" {
@@ -59,14 +45,13 @@ build {
       "HOSTNAME=${local.hostname}",
     ]
     scripts = [
-      "${path.root}/../scripts/fedora/base/xfce-desktop.sh",
+      "${path.root}/../scripts/rhel/base/desktop.sh",
     ]
 
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
     expect_disconnect = true
-    except            = var.desktop != "xfce" ? ["parallels-iso.image"] : []
+    except            = !var.install_desktop ? ["parallels-iso.image"] : []
   }
-
 
   provisioner "shell" {
     environment_vars = [
@@ -75,7 +60,7 @@ build {
     ]
 
     scripts = [
-      "${path.root}/../scripts/fedora/base/vagrant.sh",
+      "${path.root}/../scripts/rhel/base/vagrant.sh",
     ]
 
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
@@ -84,10 +69,10 @@ build {
   }
 
   provisioner "file" {
-    source      = "${path.root}/../scripts/fedora/addons"
+    source      = "${path.root}/../scripts/rhel/addons"
     destination = "/parallels-tools"
     direction   = "upload"
-    except      = length(var.addons) > 0 ? [] : ["parallels-iso.image"]
+    except      = length(var.addons) >  0 && (var.redhat_username != "" || var.redhat_password != "") ? [] : ["parallels-iso.image"]
   }
 
   provisioner "shell" {
@@ -99,13 +84,13 @@ build {
     ]
 
     scripts = [
-      "${path.root}/../scripts/fedora/addons/install.sh",
+      "${path.root}/../scripts/rhel/addons/install.sh",
     ]
 
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E bash -eux '{{ .Path }}'"
     expect_disconnect = true
     timeout           = "3h"
-    except            = length(var.addons) > 0 ? [] : ["parallels-iso.image"]
+    except            = length(var.addons) > 0 && (var.redhat_username != "" || var.redhat_password != "")  ? [] : ["parallels-iso.image"]
   }
 
   provisioner "shell" {
@@ -114,10 +99,10 @@ build {
       "USERNAME=${local.username}",
     ]
     scripts = [
-      "${path.root}/../scripts/fedora/base/password_change.sh",
+      "${path.root}/../scripts/rhel/base/password_change.sh",
     ]
 
-    execute_command   = "echo 'fedora' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    execute_command   = "echo 'rhel' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
     expect_disconnect = true
   }
 

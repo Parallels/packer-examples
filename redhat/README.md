@@ -1,10 +1,12 @@
-# Automated Fedora Virtual Machine Builder with Packer and Vagrant for Apple Silicon Macs & Parallels Desktop
+# Automated Redhat Virtual Machine Builder with Packer and Vagrant for Apple Silicon Macs & Parallels Desktop
 
-Create virtual Fedora machines or Vagrant boxes in an automated, customizable fashion using Packer. This tool is designed specifically for Macs with Apple Silicon chip and leverages Parallels Desktop.
+Create virtual Redhat machines or Vagrant boxes in an automated, customizable fashion using Packer. This tool is designed specifically for Macs with Apple Silicon chip and leverages Parallels Desktop.
 
 ## Overview
 
-This project provides automated Packer scripts to build Fedora virtual machines or Vagrant boxes. It offers the flexibility to use any of the available ISO's for the distro. The selected source can be defined by setting the `iso_url` variable in the `variables.pkrvars.hcl` file. By default, the script will use and auto-download the ISO for Fedora 2023.3 if no source is specified in the `variables.pkrvars.hcl` file.
+This project provides automated Packer scripts to build Redhat virtual machines or Vagrant boxes. It offers the flexibility to use any of the available ISO's for the distro. The selected source can be defined by setting the `iso_url` variable in the `variables.pkrvars.hcl` file. By default, the script will use and auto-download the ISO for Redhat 2023.3 if no source is specified in the `variables.pkrvars.hcl` file.
+Because Redhat is a commercial distro, you will need to provide your own iso, you can source a trial version from [here](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux).
+You also will need to provide a Redhat username/password if you want to install any addons has this is required by redhat
 
 ## Prerequisites
 
@@ -14,6 +16,7 @@ To use these Packer scripts, you'll need to have the following software installe
 * [Parallels Desktop](https://www.parallels.com/products/desktop/)
 * [Parallels Virtualization SDK](https://www.parallels.com/products/desktop/download/) (if Parallels Desktop 18 or below)
 * [Vagrant](https://www.vagrantup.com/) (optional)
+* Redhat ISO
 
 ### Calculating ISO Checksum
 
@@ -44,9 +47,9 @@ Prior to utilizing the Packer script, you must first establish the required vari
 You can set the following variables:
 
 ```hcl
-version="38"
-machine_name="Fedora Server 38"
-hostname="fedora-38"
+version="9.2"
+machine_name="Redhat Server"
+hostname="redhat-9"
 machine_specs = {
   cpus = 2,
   memory = 2048,
@@ -54,7 +57,11 @@ machine_specs = {
 }
 addons=[
 ]
-desktop=gnome
+install_desktop=true
+iso_url = ""
+iso_checksum = ""
+redhat_username=""
+redhat_password=""
 create_vagrant_box = false
 ```
 

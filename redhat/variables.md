@@ -1,6 +1,6 @@
 # Variables Guide
 
-This guide provides detailed explanations of the variables that can be set in the `variables.pkrvars.hcl` file for the Fedora Virtual Machine Builder.
+This guide provides detailed explanations of the variables that can be set in the `variables.pkrvars.hcl` file for the Redhat Virtual Machine Builder.
 
 ## User Variables
 
@@ -25,10 +25,12 @@ This guide provides detailed explanations of the variables that can be set in th
 * `boot_command` - Determines the boot command used when starting the virtual machine. This is a string, and we've provided a default value compatible with Kali Linux. However, you can specify your own or look at available options in the [boot commands](./boot_commands/index.md) directory.
 * `boot_wait` - Determines the duration the script should wait for the virtual machine to boot. While 6 minutes is suitable for most machines, slower systems might require an extended wait time.
 
-## Fedora OS Source
+## Redhat OS Source
 
 * `iso_url` - Specifies the path to the Kali Linux ISO file or the url for it to be downloaded.
 * `iso_checksum` - Specifies the checksum of the ISO file. If this is set, the script will validate the checksum of the ISO file after downloading it.
+* `redhat_username` - Specifies the username to use when registering your product.
+* `redhat_password` - Specifies the password to use when registering your product.
 
 ## Additional Options
 
