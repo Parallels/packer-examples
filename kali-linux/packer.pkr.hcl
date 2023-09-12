@@ -2,7 +2,7 @@ packer {
   required_version = ">= 1.7.0"
   required_plugins {
     parallels = {
-      version = ">= 1.0.1"
+      version = ">= 1.1.5"
       source  = "github.com/hashicorp/parallels"
     }
 

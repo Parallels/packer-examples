@@ -13,7 +13,7 @@ variable "user" {
 
 variable "version" {
   type    = string
-  default = "23.04"
+  default = "2023.3"
 }
 
 variable "machine_name" {
@@ -24,6 +24,10 @@ variable "machine_name" {
 variable "hostname" {
   type    = string
   default = ""
+}
+variable "install_desktop" {
+  type    = bool
+  default = true
 }
 
 variable "machine_specs" {
@@ -51,12 +55,10 @@ variable "boot_wait" {
 
 variable "iso_url" {
   type    = string
-  default = ""
 }
 
 variable "iso_checksum" {
   type    = string
-  default = ""
 }
 
 variable "shutdown_timeout" {
@@ -105,6 +107,16 @@ variable "output_directory" {
 }
 
 variable "output_vagrant_directory" {
+  type    = string
+  default = ""
+}
+
+variable "redhat_username" {
+  type    = string
+  default = ""
+}
+
+variable "redhat_password" {
   type    = string
   default = ""
 }

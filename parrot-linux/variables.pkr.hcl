@@ -13,7 +13,7 @@ variable "user" {
 
 variable "version" {
   type    = string
-  default = "23.04"
+  default = "5.3"
 }
 
 variable "machine_name" {
@@ -24,6 +24,10 @@ variable "machine_name" {
 variable "hostname" {
   type    = string
   default = ""
+}
+variable "desktop" {
+  type    = string
+  default = "gnome"
 }
 
 variable "machine_specs" {
