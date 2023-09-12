@@ -1,6 +1,6 @@
 locals {
-  output_dir = var.output_directory == "" ? "out" : var.output_directory
-    vagrant_output_dir = var.output_vagrant_directory == "" ? "${path.root}/box/${local.machine_name}.box": "${var.output_vagrant_directory}/box/${local.machine_name}.box"
+  output_dir         = var.output_directory == "" ? "out" : var.output_directory
+  vagrant_output_dir = var.output_vagrant_directory == "" ? "${path.root}/box/${local.machine_name}.box" : "${var.output_vagrant_directory}/box/${local.machine_name}.box"
 
   boot_command = length(var.boot_command) == 0 ? [
     "<wait>"

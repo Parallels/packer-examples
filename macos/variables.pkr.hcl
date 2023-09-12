@@ -1,11 +1,11 @@
 variable "user" {
   type = object({
-    username           = string
-    password           = string
+    username = string
+    password = string
   })
   default = {
-    username           = "parallels"
-    password           = "parallels"
+    username = "parallels"
+    password = "parallels"
   }
 }
 

@@ -29,3 +29,4 @@ crash.log
 macos/output*
 macos/packer-plugin-parallels
 **/*.ipsw
+**/*.old

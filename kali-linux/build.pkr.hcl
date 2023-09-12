@@ -1,21 +1,4 @@
 build {
-  //   hcp_packer_registry {
-  //     bucket_name = "parallels-ubuntu-server-23-04-arm"
-  //     description = <<EOT
-  // Parallels Ubuntu Server 23.04 ARM64
-  //     EOT
-  //     bucket_labels = {
-  //       "owner"          = "Parallels Desktop"
-  //       "os"             = "Ubuntu",
-  //       "ubuntu-version" = "Lunar 23.04",
-  //     }
-
-  //     build_labels = {
-  //       "build-time"   = timestamp()
-  //       "build-source" = basename(path.cwd)
-  //     }
-  //   }
-
   sources = [
     "source.parallels-iso.image"
   ]
@@ -23,31 +6,31 @@ build {
   provisioner "shell" {
     environment_vars = [
       "HOME_DIR=/home/${local.username}",
-      "USERNAME=${local.username}",
+      "DEFAULT_USERNAME=${local.username}",
     ]
     scripts = [
-      "${path.root}/../scripts/ubuntu/base/update.sh",
-      "${path.root}/../scripts/ubuntu/base/sshd.sh",
-      "${path.root}/../scripts/ubuntu/base/networking.sh",
-      "${path.root}/../scripts/ubuntu/base/sudoers.sh",
-      "${path.root}/../scripts/ubuntu/base/systemd.sh",
-      "${path.root}/../scripts/ubuntu/base/parallels.sh",
-      "${path.root}/../scripts/ubuntu/base/parallels_folders.sh",
-      "${path.root}/../scripts/ubuntu/base/minimize.sh",
+      "${path.root}/../scripts/kali-linux/base/update.sh",
+      "${path.root}/../scripts/kali-linux/base/install-snap.sh",
+      "${path.root}/../scripts/kali-linux/base/sshd.sh",
+      "${path.root}/../scripts/kali-linux/base/sudoers.sh",
+      "${path.root}/../scripts/kali-linux/base/systemd.sh",
+      "${path.root}/../scripts/kali-linux/base/parallels.sh",
+      "${path.root}/../scripts/kali-linux/base/parallels_folders.sh",
+      "${path.root}/../scripts/kali-linux/base/apt-cleanup.sh",
     ]
 
-    execute_command   = "echo 'ubuntu' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
     expect_disconnect = true
   }
 
   provisioner "shell" {
     environment_vars = [
       "HOME_DIR=/home/${local.username}",
-      "USERNAME=${local.username}",
+      "DEFAULT_USERNAME=${local.username}",
     ]
 
     scripts = [
-      "${path.root}/../scripts/ubuntu/base/vagrant.sh",
+      "${path.root}/../scripts/kali-linux/base/vagrant.sh",
     ]
 
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
@@ -56,7 +39,7 @@ build {
   }
 
   provisioner "file" {
-    source      = "${path.root}/../scripts/ubuntu/addons"
+    source      = "${path.root}/../scripts/kali-linux/addons"
     destination = "/parallels-tools"
     direction   = "upload"
     except      = length(var.addons) > 0 ? [] : ["parallels-iso.image"]
@@ -71,7 +54,7 @@ build {
     ]
 
     scripts = [
-      "${path.root}/../scripts/ubuntu/addons/install.sh",
+      "${path.root}/../scripts/kali-linux/addons/install.sh",
     ]
 
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E bash -eux '{{ .Path }}'"
@@ -86,11 +69,10 @@ build {
       "USERNAME=${local.username}",
     ]
     scripts = [
-      "${path.root}/../scripts/ubuntu/base/password_change.sh",
-      "${path.root}/../scripts/ubuntu/base/clean_user_snap_folder.sh",
+      "${path.root}/../scripts/kali-linux/base/password_change.sh",
     ]
 
-    execute_command   = "echo 'ubuntu' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    execute_command   = "echo 'kali-linux' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
     expect_disconnect = true
   }
 
