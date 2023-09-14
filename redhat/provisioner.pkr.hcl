@@ -2,7 +2,7 @@ locals {
   output_dir         = var.output_directory == "" ? "out" : var.output_directory
   vagrant_output_dir = var.output_vagrant_directory == "" ? "${path.root}/box/${local.machine_name}.box" : "${var.output_vagrant_directory}/box/${local.machine_name}.box"
 
-  version  = replace(var.version, ".", "_")
+  version  = replace(var.version, ".", "-")
   hostname = var.hostname == "" ? "rhel-${local.version}" : var.hostname
 
   boot_command = length(var.boot_command) == 0 ? [
