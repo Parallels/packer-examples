@@ -5,7 +5,7 @@ user = {
 }
 version      = "5.3"
 machine_name = "ParrotOS Architect 5.3"
-hostname     = "parrot-os"
+hostname     = "parrot-linux"
 machine_specs = {
   cpus      = 2,
   memory    = 4096,
