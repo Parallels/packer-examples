@@ -19,7 +19,7 @@ locals {
     "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
     "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
     "<bs>",
-    "auto=true url=http://{{.HTTPIP}}:{{.HTTPPort}}/parrot-os/preseed.cfg priority=critical<f10><wait>"
+    "auto=true url=http://{{.HTTPIP}}:{{.HTTPPort}}/parrot-linux/preseed.cfg priority=critical<f10><wait>"
   ] : var.boot_command
 
   iso_url = var.iso_url == "" ? "https://deb.parrot.sh/parrot/iso/5.3/Parrot-architect-5.3_arm64.iso" : var.iso_url
@@ -32,7 +32,7 @@ locals {
   password           = var.create_vagrant_box ? "vagrant" : var.user.password
   encrypted_password = var.create_vagrant_box ? "$6$parallels$VXyp.NunfN8bTmRtTNYSOrWE7KHIbHrc02A/N1oQ9dpJY4xB9KQjYEp7ZL53hzGne0QpZJK7Iqs99dQ/qeb3R." : var.user.encrypted_password
 
-  machine_name = var.machine_name == "" ? "parrot-os-${replace(local.version, ".", "_")}" : var.machine_name
+  machine_name = var.machine_name == "" ? "parrot-linux-${replace(local.version, ".", "_")}" : var.machine_name
   addons       = join(",", var.addons)
 }
 
@@ -53,8 +53,8 @@ source "parallels-iso" "image" {
   floppy_files        = null
   iso_checksum        = local.iso_checksum
   http_content = {
-    "/parrot-os/meta-data"   = templatefile("${path.root}/../http/parrot-os/meta-data.pkrtpl.hcl", { hostname = "${local.hostname}" })
-    "/parrot-os/preseed.cfg" = templatefile("${path.root}/../http/parrot-os/preseed.cfg.pkrtpl.hcl", { username = "${local.username}", password = "${local.password}", hostname = "${local.hostname}", desktop = "${local.desktop}" })
+    "/parrot-linux/meta-data"   = templatefile("${path.root}/../http/parrot-linux/meta-data.pkrtpl.hcl", { hostname = "${local.hostname}" })
+    "/parrot-linux/preseed.cfg" = templatefile("${path.root}/../http/parrot-linux/preseed.cfg.pkrtpl.hcl", { username = "${local.username}", password = "${local.password}", hostname = "${local.hostname}", desktop = "${local.desktop}" })
   }
 
   iso_url          = local.iso_url

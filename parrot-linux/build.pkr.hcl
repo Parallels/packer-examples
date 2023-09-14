@@ -10,15 +10,15 @@ build {
       "HOSTNAME=${local.hostname}",
     ]
     scripts = [
-      "${path.root}/../scripts/parrot-os/base/update.sh",
-      "${path.root}/../scripts/parrot-os/base/install-snap.sh",
-      "${path.root}/../scripts/parrot-os/base/sshd.sh",
-      "${path.root}/../scripts/parrot-os/base/sudoers.sh",
-      "${path.root}/../scripts/parrot-os/base/systemd.sh",
-      "${path.root}/../scripts/parrot-os/base/parallels.sh",
-      "${path.root}/../scripts/parrot-os/base/parallels_folders.sh",
-      "${path.root}/../scripts/parrot-os/base/apt-cleanup.sh",
-      "${path.root}/../scripts/parrot-os/base/change-hostname.sh",
+      "${path.root}/../scripts/parrot-linux/base/update.sh",
+      "${path.root}/../scripts/parrot-linux/base/install-snap.sh",
+      "${path.root}/../scripts/parrot-linux/base/sshd.sh",
+      "${path.root}/../scripts/parrot-linux/base/sudoers.sh",
+      "${path.root}/../scripts/parrot-linux/base/systemd.sh",
+      "${path.root}/../scripts/parrot-linux/base/parallels.sh",
+      "${path.root}/../scripts/parrot-linux/base/parallels_folders.sh",
+      "${path.root}/../scripts/parrot-linux/base/apt-cleanup.sh",
+      "${path.root}/../scripts/parrot-linux/base/change-hostname.sh",
     ]
 
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
@@ -32,7 +32,7 @@ build {
     ]
 
     scripts = [
-      "${path.root}/../scripts/parrot-os/base/vagrant.sh",
+      "${path.root}/../scripts/parrot-linux/base/vagrant.sh",
     ]
 
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
@@ -41,7 +41,7 @@ build {
   }
 
   provisioner "file" {
-    source      = "${path.root}/../scripts/parrot-os/addons"
+    source      = "${path.root}/../scripts/parrot-linux/addons"
     destination = "/parallels-tools"
     direction   = "upload"
     except      = length(var.addons) > 0 ? [] : ["parallels-iso.image"]
@@ -56,7 +56,7 @@ build {
     ]
 
     scripts = [
-      "${path.root}/../scripts/parrot-os/addons/install.sh",
+      "${path.root}/../scripts/parrot-linux/addons/install.sh",
     ]
 
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E bash -eux '{{ .Path }}'"
@@ -71,10 +71,10 @@ build {
       "USERNAME=${local.username}",
     ]
     scripts = [
-      "${path.root}/../scripts/parrot-os/base/password_change.sh",
+      "${path.root}/../scripts/parrot-linux/base/password_change.sh",
     ]
 
-    execute_command   = "echo 'parrot-os' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    execute_command   = "echo 'parrot-linux' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
     expect_disconnect = true
   }
 
