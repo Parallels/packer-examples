@@ -1,5 +1,7 @@
 # Parallels Packer Templates
 
+[![](https://dcbadge.vercel.app/api/server/etqdafGvjK?style=flat&theme=default)](https://discord.gg/etqdafGvjK)
+
 Welcome to our repository containing a collection of Packer scripts intended for creating diverse virtual machine configurations for the Parallels Desktop provider. 
 
 ## Quick Start
@@ -19,9 +21,9 @@ The following software is required to execute these Packer scripts:
 * [Parallels Virtualization SDK](https://www.parallels.com/products/desktop/download/)
 * [Vagrant](https://www.vagrantup.com/) (optional)
 
-### Parallels Virtualization SDK
+### Parallels Virtualization SDK (Parallels Desktop 18 or bellow)
 
-To utilize the Packer scripts, Parallels Virtualization SDK must be installed. The SDK can be downloaded from the [Parallels website](https://www.parallels.com/products/desktop/download/). To implement it with Packer, append the SDK path to the `PYTHONPATH` environment variable. This is achieved by adding the following line to your `.zhrc` file:
+To utilize the Packer scripts on Parallels 18 or bellow, Parallels Virtualization SDK must be installed. The SDK can be downloaded from the [Parallels website](https://www.parallels.com/products/desktop/download/). To implement it with Packer, append the SDK path to the `PYTHONPATH` environment variable. This is achieved by adding the following line to your `.zhrc` file:
 
 ```bash
 export PYTHONPATH=$PYTHONPATH:/Library/Frameworks/ParallelsVirtualizationSDK.framework/Versions/Current/Libraries/Python/3.7
@@ -40,10 +42,19 @@ Here is a brief overview of the repository's structure:
 │   │   └── addons
 │   ├── ubuntu
 │   │   └── addons
+│   ├── kali-linux
+│   │   └── addons
+│   ├── parrot-linux
+│   │   └── addons
+│   ├── redhat
+│   │   └── addons
 │   └── windows
 │       └── addons
 ├── macos
 ├── ubuntu
+├── Kali-linux
+├── parrot-linux
+├── redhat
 └── windows
 ```
 
@@ -59,11 +70,14 @@ Each operating system has its own dedicated directory. For detailed instructions
 
 * [macOS](macos/README.md)
 * [Ubuntu](ubuntu/README.md)
+* [Kali Linux](kali-linux/README.md)
+* [Parrot Linux](parrot-linux/README.md)
+* [Redhat](redhat/README.md)
 * [Windows 11](windows/README.md)
 
 ## Collaboration
 
-If you're interested in contributing to this repository, please create a fork and establish a new branch for your modifications. Upon finalizing your changes, submit a pull request for review. Join our [Discord](https://discord.gg/reuhvMFT) server to share ideas or request assistance.
+If you're interested in contributing to this repository, please create a fork and establish a new branch for your modifications. Upon finalizing your changes, submit a pull request for review. Join our [Discord](https://discord.gg/etqdafGvjK) server to share ideas or request assistance.
 
 ## Customization Scripts and Add-ons
 
