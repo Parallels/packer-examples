@@ -58,6 +58,14 @@ create_vagrant_box = false
 
 ### Packer
 
+### Initialize Plugins
+
+To initialize the Packer plugins, navigate to the directory containing the script and run the following command:
+
+```bash
+packer init .
+```
+
 ### Validate build configuration
 
 To validate the build configuration, navigate to the directory containing the script and run the following command:

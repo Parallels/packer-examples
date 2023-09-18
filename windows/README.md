@@ -83,18 +83,26 @@ create_vagrant_box = false
 
 ### Packer
 
+### Initialize Plugins
+
+To initialize the Packer plugins, navigate to the directory containing the script and run the following command:
+
+```bash
+packer init .
+```
+
 ### Validate build configuration
 
 To validate the build configuration, navigate to the directory containing the script and run the following command:
 
 ```bash
-$ packer validate -var-file variables.pkrvars.hcl .
+packer validate -var-file variables.pkrvars.hcl .
 ```
 
 You should see the following output:
 
 ```bash
-$ The configuration is valid.
+The configuration is valid.
 ```
 
 ### Build Machine
@@ -102,7 +110,7 @@ $ The configuration is valid.
 To build the virtual machine, navigate to the directory containing the script and run the following command:
 
 ```bash
-$ packer build .
+packer build .
 ```
 
 This will create a new virtual machine based on the configuration in the Packer script in the out folder. if you set the `create_vagrant_box` variable to `true` a Vagrant box will be created in the `out` folder.
@@ -124,7 +132,7 @@ If you are planning to use the Vagrant box, you cannot change the default user f
 
 ### Vagrantfile
 
-To create a machine from the vagrant box we need a Vagrantfile. Doing a `vagrant init <box name>` will not work because we need to do some adjustements to the Vagrantfile. You can use this template and copy it to a new folder and call it `Vagrantfile`:
+To create a machine from the vagrant box we need a Vagrantfile. Doing a `vagrant init <box name>` will not work because we need to do some adjustments to the Vagrantfile. You can use this template and copy it to a new folder and call it `Vagrantfile`:
 
 ```ruby
 Vagrant.configure("2") do |config|
