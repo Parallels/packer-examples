@@ -76,6 +76,14 @@ Refer to the detailed [variables guide](./VARIABLES.md) for information on each 
 
 ### Packer Commands
 
+### Initialize Plugins
+
+To initialize the Packer plugins, navigate to the directory containing the script and run the following command:
+
+```bash
+packer init .
+```
+
 #### Validate Build Configuration
 
 Validate the build configuration with the following command in the directory containing the script:
