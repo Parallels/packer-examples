@@ -54,11 +54,11 @@ variable "boot_wait" {
 }
 
 variable "iso_url" {
-  type    = string
+  type = string
 }
 
 variable "iso_checksum" {
-  type    = string
+  type = string
 }
 
 variable "shutdown_timeout" {
