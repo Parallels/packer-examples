@@ -38,7 +38,7 @@ build {
     expect_disconnect = true
   }
 
-      provisioner "shell" {
+  provisioner "shell" {
     environment_vars = [
       "HOME_DIR=/home/${local.username}",
       "DEFAULT_USERNAME=${local.username}",
@@ -72,7 +72,7 @@ build {
     source      = "${path.root}/../scripts/rhel/addons"
     destination = "/parallels-tools"
     direction   = "upload"
-    except      = length(var.addons) >  0 && (var.redhat_username != "" || var.redhat_password != "") ? [] : ["parallels-iso.image"]
+    except      = length(var.addons) > 0 && (var.redhat_username != "" || var.redhat_password != "") ? [] : ["parallels-iso.image"]
   }
 
   provisioner "shell" {
@@ -90,7 +90,7 @@ build {
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E bash -eux '{{ .Path }}'"
     expect_disconnect = true
     timeout           = "3h"
-    except            = length(var.addons) > 0 && (var.redhat_username != "" || var.redhat_password != "")  ? [] : ["parallels-iso.image"]
+    except            = length(var.addons) > 0 && (var.redhat_username != "" || var.redhat_password != "") ? [] : ["parallels-iso.image"]
   }
 
   provisioner "shell" {

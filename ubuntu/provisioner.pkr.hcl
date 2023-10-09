@@ -9,9 +9,7 @@ locals {
     "<wait>e<wait><down><down><down><end><wait> autoinstall ds=nocloud-net\\;s=http://{{.HTTPIP}}:{{.HTTPPort}}/ubuntu/<f10><wait>"
   ] : var.boot_command
 
-  isos_urls = var.iso_url == "" ? [
-    "https://releases.ubuntu.com/${var.version}/ubuntu-${var.version}-live-server-arm64.iso"
-  ] : [var.iso_url]
+  isos_url = var.iso_url == "" ? "https://cdimage.ubuntu.com/releases/${var.version}/release/ubuntu-${var.version}-live-server-arm64.iso" : var.iso_url
 
   iso_checksum = var.iso_checksum == "" ? "file:https://cdimage.ubuntu.com/releases/${var.version}/release/SHA256SUMS" : var.iso_checksum
   ssh_username = var.create_vagrant_box ? "vagrant" : var.ssh_username == "" ? var.user.username : var.ssh_username
@@ -41,14 +39,14 @@ source "parallels-iso" "image" {
   communicator        = "ssh"
   floppy_files        = null
   iso_checksum        = local.iso_checksum
+  iso_url             = local.isos_url
+
   http_content = {
     "/ubuntu/user-data"          = templatefile("${path.root}/../http/ubuntu/user-data.pkrtpl.hcl", { username = "${local.username}", hostname = "${local.hostname}", password = "${local.encrypted_password}" })
     "/ubuntu/meta-data"          = templatefile("${path.root}/../http/ubuntu/meta-data.pkrtpl.hcl", { hostname = "${local.hostname}" })
     "/ubuntu/preseed-hyperv.cfg" = templatefile("${path.root}/../http/ubuntu/preseed-hyperv.cfg.pkrtpl.hcl", { username = "${local.username}", password = "${local.password}" })
     "/ubuntu/preseed.cfg"        = templatefile("${path.root}/../http/ubuntu/preseed.cfg.pkrtpl.hcl", { username = "${local.username}", password = "${local.password}" })
   }
-
-  iso_urls         = local.isos_urls
   output_directory = local.output_dir
   shutdown_command = "echo '${local.username}'|sudo -S shutdown -P now"
   shutdown_timeout = var.shutdown_timeout
