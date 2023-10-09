@@ -40,7 +40,7 @@ source "parallels-iso" "image" {
   floppy_files        = null
   iso_checksum        = var.iso_checksum
   http_content = {
-    "/rhel/ks.cfg" = templatefile("${path.root}/../http/redhat/ks.cfg.pkrtpl.hcl", { username = "${local.username}", password = "${local.password}", hostname = "${local.hostname}", package="${var.install_desktop ? "@^graphical-server-environment" : "@^server-product-environment"}" })
+    "/rhel/ks.cfg" = templatefile("${path.root}/../http/redhat/ks.cfg.pkrtpl.hcl", { username = "${local.username}", password = "${local.password}", hostname = "${local.hostname}", package = "${var.install_desktop ? "@^graphical-server-environment" : "@^server-product-environment"}" })
   }
 
   iso_url          = var.iso_url

@@ -13,8 +13,8 @@ machine_specs = {
 }
 iso_url            = ""
 iso_checksum       = ""
-redhat_username = ""
-redhat_password = ""
+redhat_username    = ""
+redhat_password    = ""
 addons             = []
-install_desktop            = true
+install_desktop    = true
 create_vagrant_box = false
