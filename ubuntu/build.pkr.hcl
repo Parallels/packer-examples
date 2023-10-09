@@ -33,7 +33,6 @@ build {
       "${path.root}/../scripts/ubuntu/base/systemd.sh",
       "${path.root}/../scripts/ubuntu/base/parallels.sh",
       "${path.root}/../scripts/ubuntu/base/parallels_folders.sh",
-      "${path.root}/../scripts/ubuntu/base/minimize.sh",
     ]
 
     execute_command   = "echo 'ubuntu' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
