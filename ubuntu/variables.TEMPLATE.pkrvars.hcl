@@ -4,9 +4,9 @@ user = {
   password              = "parallels",
   force_password_change = true,
 }
-version      = "23.04"
-machine_name = "ubuntu_23.04_LTS"
-hostname     = "ubuntu-23.04"
+version      = "22.04.3"
+machine_name = "ubuntu_22.04_LTS"
+hostname     = "ubuntu-22.04"
 machine_specs = {
   cpus      = 2,
   memory    = 2048,
