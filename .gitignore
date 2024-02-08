@@ -30,3 +30,4 @@ macos/output*
 macos/packer-plugin-parallels
 **/*.ipsw
 **/*.old
+**/*.local*
