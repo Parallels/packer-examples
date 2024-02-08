@@ -60,7 +60,7 @@ create_vagrant_box = false
 * `addons` - A list of addons to install. The following addons are available:
   * `desktop` - Installs the Ubuntu desktop.
   * `vscode` - Installs Visual Studio code.
-* `create_vagrant_box` - If set to `true` a Vagrant box will be created. If set to `false` only a virtual machine will be created.
+* `create_vagrant_box` - If set to `true` a Vagrant box will be created. If set to `false` only a virtual machine will be created. If set to `true`, you olso have to disable password change for vagrant to be able to log in during initial setup by setting `force_password_change` to `false`.
 
 ### Packer
 
