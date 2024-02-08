@@ -35,7 +35,7 @@ build {
       "${path.root}/../scripts/ubuntu/base/parallels_folders.sh",
     ]
 
-    execute_command   = "echo 'ubuntu' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
     expect_disconnect = true
   }
 
@@ -86,10 +86,23 @@ build {
     ]
     scripts = [
       "${path.root}/../scripts/ubuntu/base/password_change.sh",
+    ]
+
+    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    except            = !local.force_password_change ? ["parallels-iso.image"] : []
+    expect_disconnect = true
+  }
+
+  provisioner "shell" {
+    environment_vars = [
+      "HOME_DIR=/home/${local.username}",
+      "USERNAME=${local.username}",
+    ]
+    scripts = [
       "${path.root}/../scripts/ubuntu/base/clean_user_snap_folder.sh",
     ]
 
-    execute_command   = "echo 'ubuntu' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
     expect_disconnect = true
   }
 

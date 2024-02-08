@@ -28,6 +28,12 @@ To use a Packer script, first we need to set the variables in the `variables.pkr
 This is the list of variables that can be set:
 
 ```hcl
+user = {
+  username              = "parallels"
+  encrypted_password    = "$6$parallels$tb6hm4RSqzwG3j51DSzdFD7Zw3Fxy/x5aen.Yvud7IfLqarIxMEuuM8efQy0gO.pHhT.lIz9tNYoppTGBGCsB/"
+  password              = "parallels",
+  force_password_change = false,
+}
 version="23.04"
 machine_name="ubuntu_23.04_LTS"
 hostname="ubuntu-23.04"
@@ -71,13 +77,13 @@ packer init .
 To validate the build configuration, navigate to the directory containing the script and run the following command:
 
 ```bash
-$ packer validate -var-file variables.pkrvars.hcl .
+packer validate -var-file variables.pkrvars.hcl .
 ```
 
 You should see the following output:
 
 ```bash
-$ The configuration is valid.
+The configuration is valid.
 ```
 
 ### Build Machine
@@ -85,11 +91,10 @@ $ The configuration is valid.
 To build the virtual machine, navigate to the directory containing the script and run the following command:
 
 ```bash
-$ packer build .
+packer build .
 ```
 
 This will create a new virtual machine based on the configuration in the Packer script in the out folder. if you set the `create_vagrant_box` variable to `true` a Vagrant box will be created in the `out` folder.
 
 > **Note:** The build process can take a while depending on the speed of your machine and your internet connection.  
-
 > The machine will not be automatically attached to Parallels Desktop. You will need to do this manually.

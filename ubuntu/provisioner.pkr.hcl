@@ -15,9 +15,10 @@ locals {
   ssh_username = var.create_vagrant_box ? "vagrant" : var.ssh_username == "" ? var.user.username : var.ssh_username
   ssh_password = var.create_vagrant_box ? "vagrant" : var.ssh_password == "" ? var.user.password : var.ssh_password
 
-  username           = var.create_vagrant_box ? "vagrant" : var.user.username
-  password           = var.create_vagrant_box ? "vagrant" : var.user.password
-  encrypted_password = var.create_vagrant_box ? "$6$parallels$VXyp.NunfN8bTmRtTNYSOrWE7KHIbHrc02A/N1oQ9dpJY4xB9KQjYEp7ZL53hzGne0QpZJK7Iqs99dQ/qeb3R." : var.user.encrypted_password
+  username              = var.create_vagrant_box ? "vagrant" : var.user.username
+  password              = var.create_vagrant_box ? "vagrant" : var.user.password
+  force_password_change = var.create_vagrant_box ? false : var.user.force_password_change
+  encrypted_password    = var.create_vagrant_box ? "$6$parallels$VXyp.NunfN8bTmRtTNYSOrWE7KHIbHrc02A/N1oQ9dpJY4xB9KQjYEp7ZL53hzGne0QpZJK7Iqs99dQ/qeb3R." : var.user.encrypted_password
 
   machine_name = var.machine_name == "" ? "ubuntu-${local.version}" : var.machine_name
   addons       = join(",", var.addons)
