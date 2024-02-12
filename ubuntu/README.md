@@ -34,9 +34,9 @@ user = {
   password              = "parallels",
   force_password_change = false,
 }
-version="23.04"
-machine_name="ubuntu_23.04_LTS"
-hostname="ubuntu-23.04"
+version="22.04.3"
+machine_name="ubuntu_22.04_LTS"
+hostname="ubuntu-22.04"
 machine_specs = {
   cpus = 2,
   memory = 2048,
@@ -60,7 +60,7 @@ create_vagrant_box = false
 * `addons` - A list of addons to install. The following addons are available:
   * `desktop` - Installs the Ubuntu desktop.
   * `vscode` - Installs Visual Studio code.
-* `create_vagrant_box` - If set to `true` a Vagrant box will be created. If set to `false` only a virtual machine will be created.
+* `create_vagrant_box` - If set to `true` a Vagrant box will be created. If set to `false` only a virtual machine will be created. If set to `true`, `force_password_change` will automatically be set to `false` since it would interfere with vagrant's initial setup.
 
 ### Packer
 
@@ -91,7 +91,7 @@ The configuration is valid.
 To build the virtual machine, navigate to the directory containing the script and run the following command:
 
 ```bash
-packer build .
+packer build -var-file variables.pkrvars.hcl .
 ```
 
 This will create a new virtual machine based on the configuration in the Packer script in the out folder. if you set the `create_vagrant_box` variable to `true` a Vagrant box will be created in the `out` folder.
