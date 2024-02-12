@@ -19,7 +19,5 @@ else
   exit 1
 fi
 
-wget --no-check-certificate "$pubkey_url" -O "$HOME_DIR"/authorized_keys
-
 chown -R $USERNAME "$HOME_DIR"/.ssh
 chmod -R go-rwsx "$HOME_DIR"/.ssh

@@ -79,7 +79,7 @@ d-i pkgsel/install-language-support boolean false
 d-i pkgsel/update-policy select none
 d-i pkgsel/upgrade select full-upgrade
 
-# Disable polularity contest
+# Disable popularity contest
 popularity-contest popularity-contest/participate boolean false
 
 # Select base install
