@@ -18,16 +18,7 @@ The following software is required to execute these Packer scripts:
 
 * [Packer](https://www.packer.io/)
 * [Parallels Desktop](https://www.parallels.com/products/desktop/)
-* [Parallels Virtualization SDK](https://www.parallels.com/products/desktop/download/)
 * [Vagrant](https://www.vagrantup.com/) (optional)
-
-### Parallels Virtualization SDK (Parallels Desktop 18 or bellow)
-
-To utilize the Packer scripts on Parallels 18 or bellow, Parallels Virtualization SDK must be installed. The SDK can be downloaded from the [Parallels website](https://www.parallels.com/products/desktop/download/). To implement it with Packer, append the SDK path to the `PYTHONPATH` environment variable. This is achieved by adding the following line to your `.zhrc` file:
-
-```bash
-export PYTHONPATH=$PYTHONPATH:/Library/Frameworks/ParallelsVirtualizationSDK.framework/Versions/Current/Libraries/Python/3.7
-```
 
 ## Repository Structure
 

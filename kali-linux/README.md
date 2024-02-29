@@ -12,7 +12,6 @@ To use these Packer scripts, you'll need to have the following software installe
 
 * [Packer](https://www.packer.io/)
 * [Parallels Desktop](https://www.parallels.com/products/desktop/)
-* [Parallels Virtualization SDK](https://www.parallels.com/products/desktop/download/) (if Parallels Desktop 18 or below)
 * [Vagrant](https://www.vagrantup.com/) (optional)
 
 ### Calculating ISO Checksum
@@ -28,14 +27,6 @@ You can then specify the resulting checksum in the `variables.pkrvars.hcl` file 
 ```hcl
 iso_checksum: "sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
-
-### Setting up Parallels Virtualization SDK (Optional)
-
-The Parallels Virtualization SDK is required to build the virtual machine if you are running **Parallels Desktop 18** or below, otherwise skip this strp. It can be downloaded from the [Parallels website](https://www.parallels.com/products/desktop/download/). to use it in the packer you will need to add the path to the SDK to the `PYTHONPATH` environment variable. This can be done by adding the following line to your `.zhrc` file:
-
-  ```bash
-  export PYTHONPATH=$PYTHONPATH:/Library/Frameworks/ParallelsVirtualizationSDK.framework/Versions/Current/Libraries/Python/3.7
-  ```
 
 ## Usage
 

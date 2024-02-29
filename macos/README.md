@@ -12,7 +12,6 @@ Before running the scripts, ensure you have the following software installed on 
 
 * [Packer](https://www.packer.io/)
 * [Parallels Desktop](https://www.parallels.com/products/desktop/)
-* [Parallels Virtualization SDK](https://www.parallels.com/products/desktop/download/)
 * [Vagrant](https://www.vagrantup.com/) (optional)
 
 Should you wish to use an IPSW other than the default (macOS 13.4.1), you'll need to download it manually and specify the `ipsw_url` and `ipsw_checksum` variables in the `variables.pkrvars.hcl` file. You can locate the IPSW files at [IPSW me](https://ipsw.me/).
@@ -30,14 +29,6 @@ You can then specify the resulting checksum in the `variables.pkrvars.hcl` file 
 ```hcl
 ipsw_checksum: "sha256:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 ```
-
-### Setting up Parallels Virtualization SDK
-
-The Parallels Virtualization SDK is necessary to construct the virtual machine. You can download it from the [Parallels website](https://www.parallels.com/products/desktop/download/). To make the SDK available for Packer, append the SDK path to the `PYTHONPATH` environment variable by adding the following line to your `.zhrc` file:
-
-  ```bash
-  export PYTHONPATH=$PYTHONPATH:/Library/Frameworks/ParallelsVirtualizationSDK.framework/Versions/Current/Libraries/Python/3.7
-  ```
 
 ## Usage
 
