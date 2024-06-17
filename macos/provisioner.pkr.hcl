@@ -5,40 +5,7 @@ locals {
   password           = var.create_vagrant_box ? "vagrant" : var.user.password
 
   boot_command = length(var.boot_command) == 0 ? [
-    "<wait><enter><wait2s><enter><wait20s>",               # Wait for boot
-    "<leftShiftOn><tab><leftShiftOff><spacebar><wait5s>",  # Select country
-    "<leftShiftOn><tab><leftShiftOff><spacebar><wait1s>",  #Select language
-    "<leftShiftOn><tab><leftShiftOff><spacebar><wait30s>", #Accessibility
-    "<leftShiftOn><tab><leftShiftOff><spacebar><wait2s>",  #Data and Privacy
-    "<tab><tab><tab><spacebar><wait2s>",                   #Migration assistant
-    "<leftShiftOn><tab><tab><leftShiftOff><spacebar><wait2s><tab><spacebar><wait5s>",
-    "<leftShiftOn><tab><leftShiftOff><spacebar><wait2s><tab><spacebar><wait2s>",                           #Terms and Conditions
-    "${local.username}<tab><tab>${local.password}<tab>${local.password}<tab><tab><tab><spacebar><wait2m>", #Create a computer account
-    "<leftShiftOn><tab><leftShiftOff><spacebar><wait2s><tab><spacebar><wait2s>",                           #Enable location services
-    "<leftShiftOn><tab><leftShiftOff><spacebar><wait20s>",                                                 #Select your time zone
-    "<leftShiftOn><tab><leftShiftOff><spacebar><wait2s>",                                                  #Analytics
-    "<leftShiftOn><tab><leftShiftOff><spacebar><wait20s>",                                                 #Screen Time
-    "<tab><spacebar><tab><tab><tab><spacebar><wait10s>",                                                   #Siri
-    "<leftShiftOn><tab><leftShiftOff><spacebar><wait60s>",                                                 #Choose your look
-    "",
-    "<leftCtrlOn><f7><leftCtrlOff><wait2s>",                                        #enable keyboard navigation
-    "<leftSuperOn><spacebar><leftSuperOff>System<spacebar>Settings<enter><wait5s>", #open system settings
-    "Gen<tab><tab><tab><tab><tab><tab><tab><tab><spacebar><wait5s>",                #Sharing screen
-    "<tab><tab><tab><tab><tab><tab><tab><tab><spacebar><wait5s>",                   #turn on remote login
-    "<tab><spacebar>",                                                              #open dialog box
-    "<tab><spacebar><tab><up><tab><tab><tab><tab><spacebar><wait5s>",               #Done
-    "",
-    "<leftSuperOn><spacebar><leftSuperOff>terminal<enter><wait10s>",       #open terminal
-    "sudo visudo /private/etc/sudoers.d/${local.username}<enter><wait2s>", #open vim
-    "${local.password}<enter><wait2s>",                                    #password
-    "i<wait>${local.username} ALL = (ALL) NOPASSWD: ALL",
-    "<esc>:wq<enter><wait2s>",                                                                                                           #save and quit
-    "NONINTERACTIVE=1 /bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"<enter><wait3m>", #install homebrew
-    "(echo; echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"') >> /Users/parallels/.zprofile<enter><wait5s>",
-    "eval \"$(/opt/homebrew/bin/brew shellenv)\"<enter><wait5s>",
-
-    "sudo /Volumes/Parallels\\ Tools/Install.app/Contents/MacOS/PTIAgent<enter><wait2m>", #install parallels tools and restart
-    "<enter><wait5s><enter>"                                                              #restart
+    "<wait>"
   ] : var.boot_command
 
   ipsw_url = length(var.ipsw_url) == 0 ? "https://updates.cdn-apple.com/2023SpringFCS/fullrestores/042-01877/2F49A9FE-7033-41D0-9D0C-64EFCE6B4C22/UniversalMac_13.4.1_22F82_Restore.ipsw" : var.ipsw_url
@@ -60,6 +27,151 @@ locals {
 source "parallels-ipsw" "image" {
   output_directory = local.output_dir
   boot_command     = local.boot_command
+
+  boot_screen_config {
+    boot_command     = ["<wait1s><enter>"]
+    screen_name      = "Empty"
+    matching_strings = []
+  }
+  boot_screen_config {
+    boot_command     = ["<wait1s><enter>"]
+    screen_name      = "GetStarted"
+    matching_strings = ["Get Started"]
+  }
+  boot_screen_config {
+    boot_command     = ["<wait1s><enter>"]
+    screen_name      = "GetStarted"
+    matching_strings = ["hola"]
+  }
+  boot_screen_config {
+    boot_command     = ["<wait1s><enter>"]
+    screen_name      = "GetStarted"
+    matching_strings = ["hallo"]
+  }
+  boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
+    screen_name      = "Language"
+    matching_strings = ["English", "Language", "Australia", "India"]
+  }
+  boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
+    screen_name      = "Country"
+    matching_strings = ["Select Your Country or Region"]
+  }
+  boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
+    screen_name      = "SpokenLanguages"
+    matching_strings = ["Written and Spoken Languages"]
+  }
+  boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
+    screen_name      = "Accessibility"
+    matching_strings = ["Accessibility", "Vision", "Hearing", "Motor", "Cognitive"]
+  }
+  boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
+    screen_name      = "DataAndPrivacy"
+    matching_strings = ["Data", "Privacy", "This icon appears"]
+  }
+  boot_screen_config {
+    boot_command     = ["<tab><tab><tab><spacebar>"]
+    screen_name      = "MigrationAssistant"
+    matching_strings = ["Migration Assistant", "From a Mac", "Time Machine backup"]
+  }
+  boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><tab><leftShiftOff><spacebar>"]
+    screen_name      = "SignInWithApple"
+    matching_strings = ["Sign in with your apple ID", "Sign in to use iCloud"]
+  }
+  boot_screen_config {
+    boot_command     = ["<tab><spacebar>"]
+    screen_name      = "SignInWithApplePopup"
+    matching_strings = ["Are you sure you want to skip", "signing in with an Apple ID?"]
+  }
+  boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar><wait1s><tab><spacebar>"]
+    screen_name      = "TermsAndConditions"
+    matching_strings = ["Terms and Conditions", "macOS Software Licence Agreement"]
+  }
+  boot_screen_config {
+    boot_command     = ["${local.ssh_username}<tab><tab>${local.ssh_username}<tab>${local.ssh_username}<tab><tab><tab><spacebar>"]
+    screen_name      = "CreateAccount"
+    matching_strings = ["Create a Computer Account", "Fill out the following information"]
+  }
+  boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar><wait2s><tab><spacebar>"]
+    screen_name      = "LocationServices"
+    matching_strings = ["Enable Location Services", "About Location Services"]
+  }
+  boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
+    screen_name      = "TimeZone"
+    matching_strings = ["Select your Time Zone"]
+  }
+  boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
+    screen_name      = "Analytics"
+    matching_strings = ["Share Mac Analytics with Apple"]
+  }
+  boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
+    screen_name      = "ScreenTime"
+    matching_strings = ["Screen Time", "Get insights about your"]
+  }
+  boot_screen_config {
+    boot_command     = ["<tab><spacebar><tab><tab><tab><spacebar>"]
+    screen_name      = "Siri"
+    matching_strings = ["Siri", "Siri helps you get things done"]
+  }
+  boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
+    screen_name      = "Looks"
+    matching_strings = ["Choose your look", "Select an appearance"]
+  }
+  boot_screen_config {
+    boot_command = [
+      "<leftCtrlOn><f7><leftCtrlOff>",                                                  #enable keyboard navigation
+      "<leftSuperOn><spacebar><leftSuperOff>System<spacebar>Settings<enter><wait5s>",   #open system settings
+      "<up><wait><tab><wait><leftShiftOn><tab><tab><tab><tab><leftShiftOff><spacebar>", #sharing
+    ]
+    screen_name      = "Desktop"
+    matching_strings = ["Finder", "Go"]
+  }
+  boot_screen_config {
+    boot_command = ["<leftShiftOn><tab><tab><tab><tab><tab><tab><leftShiftOff><spacebar>", #remote login on
+      "<leftSuperOn><spacebar><leftSuperOff>terminal<enter>"                               #open terminal
+    ]
+    screen_name      = "Sharing"
+    matching_strings = ["File Sharing", "Media Sharing", "Screen Sharing"]
+  }
+  boot_screen_config {
+    boot_command     = ["<tab><spacebar>"]
+    screen_name      = "PDInstalled"
+    matching_strings = ["Parallels Tools have been", "Installed successfully"]
+  }
+  boot_screen_config {
+    boot_command     = ["<spacebar>"]
+    screen_name      = "RestartNotification"
+    matching_strings = ["Do you want to terminate", "processes in this window"]
+    is_last_screen   = true
+  }
+  boot_screen_config {
+    boot_command     = ["<wait3s><spacebar>"]
+    screen_name      = "InterruptedRestartNotification"
+    matching_strings = ["interrupted restart", "Terminal"]
+    is_last_screen   = true
+  }
+  boot_screen_config {
+    boot_command = ["sudo visudo /private/etc/sudoers.d/${local.ssh_username}<enter><wait2s>",
+      "${local.ssh_username}<enter><wait2s>",
+      "i<wait>${local.ssh_username} ALL = (ALL) NOPASSWD: ALL",
+      "<esc>:wq<enter><wait2s>",
+      "sudo /Volumes/Parallels\\ Tools/Install.app/Contents/MacOS/PTIAgent<enter>"
+    ]
+    screen_name      = "Terminal"
+    matching_strings = ["Terminal", "${local.ssh_username}@", "Last login:"]
+  }
+
   boot_wait        = "${var.boot_wait}"
   shutdown_command = "sudo shutdown -h now"
   ipsw_url         = local.ipsw_url

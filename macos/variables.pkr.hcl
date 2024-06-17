@@ -42,7 +42,7 @@ variable "boot_command" {
 
 variable "boot_wait" {
   type    = string
-  default = "6m"
+  default = "1s"
 }
 
 variable "macvm_path" {
