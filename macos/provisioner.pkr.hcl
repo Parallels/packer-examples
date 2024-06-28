@@ -94,7 +94,7 @@ source "parallels-ipsw" "image" {
     matching_strings = ["Terms and Conditions", "macOS Software Licence Agreement"]
   }
   boot_screen_config {
-    boot_command     = ["${local.ssh_username}<tab><tab>${local.ssh_username}<tab>${local.ssh_username}<tab><tab><tab><spacebar>"]
+    boot_command     = ["${local.ssh_username}<tab><tab>${local.ssh_password}<tab>${local.ssh_password}<tab><tab><tab><spacebar>"]
     screen_name      = "CreateAccount"
     matching_strings = ["Create a Computer Account", "Fill out the following information"]
   }
