@@ -59,6 +59,35 @@ create_vagrant_box = false
 
 Refer to the detailed [variables guide](./VARIABLES.md) for information on each variable.
 
+## New! Power of OCR in macOS automation
+
+In [packer-plugin-parallels v1.2.0](https://github.com/Parallels/packer-plugin-parallels/releases/tag/v1.2.0), we introduced an OCR / Image recognition based boot scripts support for macOS VMs. To use this, define screens and corresponding actions like :
+
+```hcl
+boot_screen_config { # This configuration represents single screen.
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"] # boot command to execute when this screen is detected.
+    screen_name      = "Language" # Give a name to identify in the logs.
+    matching_strings = ["English", "Language", "Australia", "India"] # If system detects all of these texts in current screen, the corresponding boot_command will be executed.
+  }
+
+# Next screen - the configuration can go on!
+boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
+    screen_name      = "Country"
+    matching_strings = ["Select Your Country or Region"]
+    is_last_screen   = true # Stops boot when boot_command of this screen executed.
+  }
+
+# If none of the screens are matching, execute an "empty" config :
+boot_screen_config {
+    boot_command     = ["<wait1s><enter>"]
+    screen_name      = "Empty"
+    matching_strings = []
+  }
+```
+
+This feature allows to execute complex installation / configuration procedures faster and accurate in macOS VMs. Refer to our examples provided for more details. We've covered installation procedures for macOS 12, 13 and 14. This includes navigating through the initial steps, enabling remote login, enabling passwordless sudo for provisioning and installing Parallels tools.
+
 ### Packer Commands
 
 ### Initialize Plugins
@@ -93,5 +122,5 @@ packer build -var-file variables.local.pkrvars.hcl .
 
 This action will generate a new virtual machine as per the settings in the Packer script, placing it in the `out` directory. If the `create_vagrant_box` variable is set to `true`, a Vagrant box will also be generated in the `out` folder.
 
-> **Note:** The build process duration depends on your machine's capabilities and internet connection speed.  
+> **Note:** The build process duration depends on your machine's capabilities and internet connection speed.
 > Post-build, the machine will not auto-attach to Parallels Desktop. This has to be performed manually.
