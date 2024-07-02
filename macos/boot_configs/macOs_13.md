@@ -1,34 +1,9 @@
-locals {
-  output_dir         = var.output_directory == "" ? "out" : var.output_directory
-  vagrant_output_dir = var.output_vagrant_directory == "" ? "${path.root}/box/${local.machine_name}.box" : "${var.output_vagrant_directory}/box/${local.machine_name}.box"
-  username           = var.create_vagrant_box ? "vagrant" : var.user.username
-  password           = var.create_vagrant_box ? "vagrant" : var.user.password
+# Boot Commands for Mac OS Ventura 13
 
-  boot_command = length(var.boot_command) == 0 ? [
-    "<wait>"
-  ] : var.boot_command
+This is the key sentence to boot the Mac OS Ventura 13 for an automated installation. While this should work in most cases as they depend in waiting times this can sometimes lead to a failed installation. If this happens you can try to increase the waiting times or add more waiting times between the commands. This will also install brew package manager and Parallels Desktop Tools.
 
-  ipsw_url = length(var.ipsw_url) == 0 ? "https://updates.cdn-apple.com/2024SpringFCS/fullrestores/062-01897/C874907B-9F82-4109-87EB-6B3C9BF1507D/UniversalMac_14.5_23F79_Restore.ipsw" : var.ipsw_url
-
-  ipsw_checksum = var.ipsw_checksum == "" ? "md5:a0083c0f07465a643a672c67f5a746e7" : var.ipsw_checksum
-  ssh_username  = var.create_vagrant_box ? "vagrant" : var.ssh_username == "" ? var.user.username : var.ssh_username
-  ssh_password  = var.create_vagrant_box ? "vagrant" : var.ssh_password == "" ? var.user.password : var.ssh_password
-
-  machine_name = var.machine_name == "" ? "macOs-14.5_23F79" : var.machine_name
-  addons       = join(",", var.addons)
-  sources = [
-    var.macvm_path == "" ? "parallels-ipsw.image" : "parallels-macvm.image"
-  ]
-  vagrant_sources = [
-    var.macvm_path == "" ? "parallels-ipsw.image" : "parallels-macvm.image"
-  ]
-}
-
-source "parallels-ipsw" "image" {
-  output_directory = local.output_dir
-  boot_command     = local.boot_command
-
-  boot_screen_config {
+```text
+    boot_screen_config {
     boot_command     = ["<wait1s><enter>"]
     screen_name      = "Empty"
     matching_strings = []
@@ -81,7 +56,7 @@ source "parallels-ipsw" "image" {
   boot_screen_config {
     boot_command     = ["<leftShiftOn><tab><tab><leftShiftOff><spacebar>"]
     screen_name      = "SignInWithApple"
-    matching_strings = ["Sign in with your apple", "Sign in to use iCloud"]
+    matching_strings = ["Sign in with your apple ID", "Sign in to use iCloud"]
   }
   boot_screen_config {
     boot_command     = ["<tab><spacebar>"]
@@ -111,7 +86,7 @@ source "parallels-ipsw" "image" {
   boot_screen_config {
     boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
     screen_name      = "Analytics"
-    matching_strings = ["Share Mac Analytics with Apple"] # This will be different for preview versions
+    matching_strings = ["Share Mac Analytics with Apple"]
   }
   boot_screen_config {
     boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
@@ -131,23 +106,25 @@ source "parallels-ipsw" "image" {
   boot_screen_config {
     boot_command = [
       "<leftCtrlOn><f7><leftCtrlOff>",                                                  #enable keyboard navigation
-      "<leftSuperOn><spacebar><leftSuperOff>System<spacebar>Settings<enter><wait5s>",   #open system settings
+      "<leftShiftOn><leftSuperOn>G<leftSuperOff><leftShiftOff>/Applications/System<spacebar>Settings.app<enter><leftSuperOn>o<leftSuperOff><wait2s>",   #open system settings
       "<up><wait><tab><wait><leftShiftOn><tab><tab><tab><tab><leftShiftOff><spacebar>", #sharing
     ]
     screen_name      = "Desktop"
     matching_strings = ["Finder", "Go"]
   }
   boot_screen_config {
-    boot_command = ["<leftShiftOn><tab><tab><tab><tab><tab><tab><leftShiftOff><spacebar>", #remote login on
-      "<leftSuperOn><spacebar><leftSuperOff>terminal<enter>"                               #open terminal
+    boot_command = ["<tab><tab><tab><tab><tab><tab><tab><tab><wait><spacebar><tab><spacebar>", #remote login on
+      "<tab><spacebar><esc><leftSuperOn>q<leftSuperOff>", #quit system preferences
+      "<leftShiftOn><leftSuperOn>G<leftSuperOff><leftShiftOff>/Applications/Utilities/Terminal.app<enter><leftSuperOn>o<leftSuperOff>" #open terminal
     ]
     screen_name      = "Sharing"
     matching_strings = ["File Sharing", "Media Sharing", "Screen Sharing"]
   }
   boot_screen_config {
-    boot_command     = ["<tab><spacebar>"]
+    boot_command     = ["<leftCtrlOn>cccc<leftCtrlOff><wait>sudo reboot<enter><wait>${local.ssh_password}<enter>"]
     screen_name      = "PDInstalled"
     matching_strings = ["Parallels Tools have been", "Installed successfully"]
+    is_last_screen   = true
   }
   boot_screen_config {
     boot_command     = ["<spacebar>"]
@@ -171,25 +148,4 @@ source "parallels-ipsw" "image" {
     screen_name      = "Terminal"
     matching_strings = ["Terminal", "${local.ssh_username}@", "Last login:"]
   }
-
-  boot_wait        = "${var.boot_wait}"
-  shutdown_command = "sudo shutdown -h now"
-  ipsw_url         = local.ipsw_url
-  ipsw_checksum    = local.ipsw_checksum
-  ssh_username     = "${local.ssh_username}"
-  ssh_password     = "${local.ssh_password}"
-  vm_name          = "${local.machine_name}"
-  cpus             = "${var.machine_specs.cpus}"
-  memory           = "${var.machine_specs.memory}"
-}
-
-source "parallels-macvm" "image" {
-  output_directory = local.output_dir
-  boot_command     = local.boot_command
-  boot_wait        = "${var.boot_wait}"
-  shutdown_command = "sudo shutdown -h now"
-  source_path      = var.macvm_path
-  ssh_username     = "${local.ssh_username}"
-  ssh_password     = "${local.ssh_password}"
-  vm_name          = "${local.machine_name}"
-}
+```
