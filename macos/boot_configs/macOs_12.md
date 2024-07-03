@@ -1,6 +1,6 @@
 # Boot Configs for Mac OS 12 Monterey
 
-This is the key sentence to boot the Mac OS Ventura 13 for an automated installation. While this should work in most cases as they depend in waiting times this can sometimes lead to a failed installation. If this happens you can try to increase the waiting times or add more waiting times between the commands. This will also install brew package manager and Parallels Desktop Tools.
+This is the screen configuration to boot the Mac OS Monterey for an automated installation. While this should work in most cases as they depend on matching strings provided. If this happens you can print log by enabling logs (export PACKER_LOG=1) in the terminal, packer will print the best detected text in the logs. You can use this text to fine tune the matching_strings and restart the automation.
 
 ```text
   boot_screen_config {

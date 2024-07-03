@@ -94,6 +94,11 @@ source "parallels-ipsw" "image" {
     matching_strings = ["Terms and Conditions", "macOS Software Licence Agreement"]
   }
   boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar><wait1s><tab><spacebar>"]
+    screen_name      = "TermsAndConditions"
+    matching_strings = ["Terms and Conditions", "macOS Software License Agreement"] # for US, Licen's'e is used
+  }
+  boot_screen_config {
     boot_command     = ["${local.ssh_username}<tab><tab>${local.ssh_password}<tab>${local.ssh_password}<tab><tab><tab><spacebar>"]
     screen_name      = "CreateAccount"
     matching_strings = ["Create a Computer Account", "Fill out the following information"]
@@ -145,9 +150,10 @@ source "parallels-ipsw" "image" {
     matching_strings = ["File Sharing", "Media Sharing", "Screen Sharing"]
   }
   boot_screen_config {
-    boot_command     = ["<tab><spacebar>"]
+    boot_command     = ["<spacebar><wait1s><enter>"] # This is for PD19 tools UI
     screen_name      = "PDInstalled"
     matching_strings = ["Parallels Tools have been", "Installed successfully"]
+    is_last_screen   = true
   }
   boot_screen_config {
     boot_command     = ["<spacebar>"]
