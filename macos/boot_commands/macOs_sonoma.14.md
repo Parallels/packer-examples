@@ -1,6 +1,6 @@
-# Boot Commands for Mac OS Ventura 13
+# Boot Commands for Mac OS Sonoma 14
 
-This is the key sentence to boot the Mac OS Ventura 13 for an automated installation. While this should work in most cases as they depend in waiting times this can sometimes lead to a failed installation. If this happens you can try to increase the waiting times or add more waiting times between the commands. This will also install brew package manager and Parallels Desktop Tools.
+This is the key sentence to boot the Mac OS Sonoma 14 for an automated installation. While this should work in most cases as they depend in waiting times this can sometimes lead to a failed installation. If this happens you can try to increase the waiting times or add more waiting times between the commands. This will also install brew package manager and Parallels Desktop Tools.
 
 ```text
 "<wait><enter><wait2s><enter><wait20s>",              # Wait for boot
