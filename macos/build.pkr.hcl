@@ -1,4 +1,5 @@
 build {
+  count   = 0
   sources = local.sources
 
   provisioner "file" {
