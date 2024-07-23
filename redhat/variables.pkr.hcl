@@ -120,3 +120,8 @@ variable "redhat_password" {
   type    = string
   default = ""
 }
+
+variable "redhat_unsubscribe" {
+  type    = bool
+  default = false
+}

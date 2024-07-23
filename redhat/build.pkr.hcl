@@ -106,6 +106,16 @@ build {
     expect_disconnect = true
   }
 
+  provisioner "shell" {
+
+    scripts = [
+      "${path.root}/../scripts/rhel/base/unsubscribe.sh",
+    ]
+
+    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    expect_disconnect = true
+    except            = !var.redhat_unsubscribe ? ["parallels-iso.image"] : []
+  }
 
   post-processor "vagrant" {
     compression_level    = 9
