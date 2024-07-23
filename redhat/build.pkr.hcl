@@ -56,7 +56,7 @@ build {
   provisioner "shell" {
     environment_vars = [
       "HOME_DIR=/home/${local.username}",
-      "DEFAULT_USERNAME=${local.username}",
+      "USERNAME=${local.username}",
     ]
 
     scripts = [
