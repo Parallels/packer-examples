@@ -31,6 +31,7 @@ This guide provides detailed explanations of the variables that can be set in th
 * `iso_checksum` - Specifies the checksum of the ISO file. If this is set, the script will validate the checksum of the ISO file after downloading it.
 * `redhat_username` - Specifies the username to use when registering your product.
 * `redhat_password` - Specifies the password to use when registering your product.
+* `redhat_unsubscribe` - Remove all subscriptions from the system.
 
 ## Additional Options
 

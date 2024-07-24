@@ -15,6 +15,7 @@ iso_url            = ""
 iso_checksum       = ""
 redhat_username    = ""
 redhat_password    = ""
+redhat_unsubscribe = false
 addons             = []
 install_desktop    = true
 create_vagrant_box = false
