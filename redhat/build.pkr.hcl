@@ -104,6 +104,7 @@ build {
 
     execute_command   = "echo 'rhel' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
     expect_disconnect = true
+    except            = !var.create_vagrant_box ? ["parallels-iso.image"] : []
   }
 
 
