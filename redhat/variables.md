@@ -43,6 +43,7 @@ This guide provides detailed explanations of the variables that can be set in th
 * `ssh_wait_timeout` - Specifies the timeout (in seconds) to wait for the virtual machine to start SSH. If the virtual machine does not start SSH within this time, the script will exit with an error.
 * `ssh_timeout` - Specifies the timeout (in seconds) to wait for the virtual machine to respond to SSH. If the virtual machine does not respond to SSH within this time, the script will exit with an error.
 * `addons` - Lists the addons to install on the virtual machine. The available addons include:
+  * `ansible` - Installs Ansible Core.`
   * `docker` - Installs Docker.
   * `git` - Installs Git.
   * `golang` - Installs Go.
