@@ -42,10 +42,10 @@ source "parallels-iso" "image" {
   iso_url             = local.isos_url
 
   http_content = {
-    "/ubuntu/user-data"          = templatefile("${path.root}/../http/ai/user-data.pkrtpl.hcl", { username = "${local.username}", hostname = "${local.hostname}", password = "${local.encrypted_password}" })
-    "/ubuntu/meta-data"          = templatefile("${path.root}/../http/ai/meta-data.pkrtpl.hcl", { hostname = "${local.hostname}" })
-    "/ubuntu/preseed-hyperv.cfg" = templatefile("${path.root}/../http/ai/preseed-hyperv.cfg.pkrtpl.hcl", { username = "${local.username}", password = "${local.password}" })
-    "/ubuntu/preseed.cfg"        = templatefile("${path.root}/../http/ai/preseed.cfg.pkrtpl.hcl", { username = "${local.username}", password = "${local.password}" })
+    "/ubuntu/user-data"          = templatefile("${path.root}/../http/ai_devbox/user-data.pkrtpl.hcl", { username = "${local.username}", hostname = "${local.hostname}", password = "${local.encrypted_password}" })
+    "/ubuntu/meta-data"          = templatefile("${path.root}/../http/ai_devbox/meta-data.pkrtpl.hcl", { hostname = "${local.hostname}" })
+    "/ubuntu/preseed-hyperv.cfg" = templatefile("${path.root}/../http/ai_devbox/preseed-hyperv.cfg.pkrtpl.hcl", { username = "${local.username}", password = "${local.password}" })
+    "/ubuntu/preseed.cfg"        = templatefile("${path.root}/../http/ai_devbox/preseed.cfg.pkrtpl.hcl", { username = "${local.username}", password = "${local.password}" })
   }
   output_directory = local.output_dir
   shutdown_command = "echo '${local.username}'|sudo -S shutdown -P now"

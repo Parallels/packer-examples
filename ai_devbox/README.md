@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-This is a automated packer build for Ubuntu. It can create a Vagrant box or just a virtual machine in Parallels Desktop.
+This is a automated packer build for Ubuntu that includes most of the tools used for developing AI. It can create a Vagrant box or just a virtual machine in Parallels Desktop.
 There are several parameters that can be set in the `variables.pkrvars.hcl` file. these will be explained in the next section.
 
 ## Prerequisites
@@ -12,7 +12,6 @@ To use these Packer scripts, you'll need to have the following software installe
 * [Packer](https://www.packer.io/)
 * [Parallels Desktop](https://www.parallels.com/products/desktop/)
 * [Vagrant](https://www.vagrantup.com/) (optional)
-
 
 ## Usage
 
@@ -26,23 +25,23 @@ user = {
   password              = "parallels",
   force_password_change = false,
 }
-version="22.04.3"
-machine_name="ubuntu_22.04_LTS"
-hostname="ubuntu-22.04"
+
+machine_name="AI_Devbox"
+hostname="ai-devbox"
 machine_specs = {
-  cpus = 2,
-  memory = 2048,
-  disk_size = "65536",
+  cpus      = 2,
+  memory    = 8192,
+  disk_size = "90000",
 }
 addons=[
   "desktop"
+  "vscode"
 ]
 create_vagrant_box = false
 ```
 
 ### variables
 
-* `version` - The version of Ubuntu to build. This can be any version that is available for ARM in the [Ubuntu release page](https://https://releases.ubuntu.com).
 * `machine_name` - The name of the virtual machine in Parallels Desktop.
 * `hostname` - The hostname of the virtual machine.
 * `machine_specs` - The specs of the virtual machine. This is a map with the following keys:
@@ -51,7 +50,7 @@ create_vagrant_box = false
   * `disk_size` - The size of the virtual disk in MB.
 * `addons` - A list of addons to install. The following addons are available:
   * `desktop` - Installs the Ubuntu desktop.
-  * `vscode` - Installs Visual Studio code.
+  * `vscode` - Installs Visual Studio code with the Python Extension for easy development.
 * `create_vagrant_box` - If set to `true` a Vagrant box will be created. If set to `false` only a virtual machine will be created. If set to `true`, `force_password_change` will automatically be set to `false` since it would interfere with vagrant's initial setup.
 
 ### Packer
