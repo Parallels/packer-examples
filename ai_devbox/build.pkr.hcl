@@ -1,21 +1,4 @@
 build {
-  //   hcp_packer_registry {
-  //     bucket_name = "parallels-ubuntu-server-23-04-arm"
-  //     description = <<EOT
-  // Parallels Ubuntu Server 23.04 ARM64
-  //     EOT
-  //     bucket_labels = {
-  //       "owner"          = "Parallels Desktop"
-  //       "os"             = "Ubuntu",
-  //       "ubuntu-version" = "Lunar 23.04",
-  //     }
-
-  //     build_labels = {
-  //       "build-time"   = timestamp()
-  //       "build-source" = basename(path.cwd)
-  //     }
-  //   }
-
   sources = [
     "source.parallels-iso.image"
   ]
@@ -26,6 +9,7 @@ build {
       "USERNAME=${local.username}",
     ]
     scripts = [
+      "${path.root}/../scripts/ubuntu/base/disk_space.sh",
       "${path.root}/../scripts/ubuntu/base/update.sh",
       "${path.root}/../scripts/ubuntu/base/sshd.sh",
       "${path.root}/../scripts/ubuntu/base/networking.sh",

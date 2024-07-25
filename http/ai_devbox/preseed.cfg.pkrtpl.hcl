@@ -46,7 +46,7 @@ d-i mirror/http/proxy string
 
 # This makes partman automatically partition without confirmation.
 d-i partman-efi/non_efi_system boolean true
-d-i partman-auto-lvm/guided_size string max
+d-i partman-auto-lvm/guided_size string 100%
 d-i partman-auto/choose_recipe select atomic
 d-i partman-auto/method string lvm
 d-i partman-lvm/confirm boolean true
