@@ -18,6 +18,24 @@ build {
     except            = var.redhat_username == "" || var.redhat_password == "" ? ["parallels-iso.image"] : []
   }
 
+  # install tools
+  provisioner "shell" {
+    environment_vars = [
+      "HOME_DIR=/home/${local.username}",
+      "DEFAULT_USERNAME=${local.username}",
+      "HOSTNAME=${local.hostname}",
+    ]
+    scripts = [
+      "${path.root}/../scripts/rhel/base/parallels.sh",
+      "${path.root}/../scripts/rhel/base/parallels_folders.sh",
+    ]
+
+    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    except            = var.redhat_username == "" || var.redhat_password == "" ? ["parallels-iso.image"] : []
+    expect_disconnect = true
+  }
+
+
   provisioner "shell" {
     environment_vars = [
       "HOME_DIR=/home/${local.username}",
@@ -27,8 +45,6 @@ build {
     scripts = [
       "${path.root}/../scripts/rhel/base/init.sh",
       "${path.root}/../scripts/rhel/base/sshd.sh",
-      "${path.root}/../scripts/rhel/base/parallels.sh",
-      "${path.root}/../scripts/rhel/base/parallels_folders.sh",
       "${path.root}/../scripts/rhel/base/cleanup.sh",
       "${path.root}/../scripts/rhel/base/change-hostname.sh",
     ]

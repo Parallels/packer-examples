@@ -33,6 +33,8 @@ parallels-iso|parallels-pvm)
     rm -rf /tmp/parallels;
     rm -f "$HOME_DIR"/*.iso;
 
+    reboot
+
     # Parallels Tools for Linux includes native auto-mount script,
     # which causes losing some of Vagrant-relative shared folders.
     # So, we should disable this behavior.
