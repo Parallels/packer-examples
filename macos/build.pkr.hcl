@@ -15,6 +15,19 @@ build {
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
     expect_disconnect = true
     except            = !var.create_vagrant_box ? local.vagrant_sources : []
+
+  provisioner "shell" {
+    environment_vars = [
+      "NONINTERACTIVE=1"
+    ]
+
+    inline = [
+      "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"",
+      "(echo; echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"') >> /Users/${local.username}/.zprofile"
+    ]
+
+    timeout           = "30m"
+    except            = !var.install_homebrew ? local.sources : []
   }
 
   ## Install teh Homebrew Package Manager
