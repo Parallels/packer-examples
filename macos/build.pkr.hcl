@@ -1,6 +1,20 @@
 build {
   sources = local.sources
 
+  provisioner "shell" {
+    environment_vars = [
+      "NONINTERACTIVE=1"
+    ]
+
+    inline = [
+      "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"",
+      "(echo; echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"') >> /Users/${local.username}/.zprofile"
+    ]
+
+    timeout           = "30m"
+    except            = !var.install_homebrew ? local.sources : []
+  }
+
   provisioner "file" {
     source      = "${path.root}/../scripts/macos/addons"
     destination = "/Users/${local.username}/parallels-tools"
