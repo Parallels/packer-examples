@@ -1,3 +1,10 @@
+// Variables for the macOS Parallels Packer build
+// Options are macos_12, macos_13, macos_14, macos_15
+variable "version" {
+  type    = string
+  default = "sonoma"
+}
+
 variable "user" {
   type = object({
     username = string

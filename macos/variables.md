@@ -4,6 +4,12 @@ This guide provides detailed explanations of the variables that can be set in th
 
 ## User Variables
 
+* `version` - Specifies the version of macOS to install. This will setup the correct boot commands, the available versions are:
+  * `monterey`
+  * `ventura`
+  * `sonoma`
+  * `sequoia`
+
 * `user` - This variable defines the user account to be created on the virtual machine. It contains two keys:
   * `username` - Specifies the username for the user.
   * `password` - Specifies the password for the user.
