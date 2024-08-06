@@ -1,6 +1,22 @@
 build {
   sources = local.sources
 
+  ## Install the insecure Vagrant ssh key, if we're building a Vagrant box
+  provisioner "shell" {
+    environment_vars = [
+      "HOME_DIR=/Users/${local.username}",
+      "USERNAME=${local.username}",
+    ]
+
+    scripts = [
+      "${path.root}/../scripts/macos/base/vagrant_ssh_key.sh",
+    ]
+
+    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    expect_disconnect = true
+    except            = !var.create_vagrant_box ? local.vagrant_sources : []
+  }
+
   provisioner "file" {
     source      = "${path.root}/../scripts/macos/addons"
     destination = "/Users/${local.username}/parallels-tools"
