@@ -16,6 +16,7 @@ build {
     expect_disconnect = true
     except            = !var.create_vagrant_box ? local.vagrant_sources : []
 
+  ## Install the Homebrew Package Manager
   provisioner "shell" {
     environment_vars = [
       "NONINTERACTIVE=1"
@@ -30,19 +31,6 @@ build {
     except            = !var.install_homebrew ? local.sources : []
   }
 
-  ## Install teh Homebrew Package Manager
-  provisioner "shell" {
-    environment_vars = [
-      "NONINTERACTIVE=1"
-    ]
-
-    inline = [
-      "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\"",
-      "(echo; echo 'eval \"$(/opt/homebrew/bin/brew shellenv)\"') >> /Users/${local.username}/.zprofile"
-    ]
-
-    timeout           = "30m"
-    except            = !var.install_homebrew ? local.sources : []
   provisioner "file" {
     source      = "${path.root}/../scripts/macos/addons"
     destination = "/Users/${local.username}/parallels-tools"
