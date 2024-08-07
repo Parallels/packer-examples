@@ -82,6 +82,11 @@ variable "addons" {
   default = []
 }
 
+variable "install_homebrew" {
+  type    = bool
+  default = false
+}
+
 variable "create_vagrant_box" {
   type    = bool
   default = false

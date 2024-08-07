@@ -39,5 +39,6 @@ This guide provides detailed explanations of the variables that can be set in th
 * `addons` - Lists the addons to install on the virtual machine. The available addons include:
   * `vscode` - Installs Visual Studio Code.
 * `create_vagrant_box` - If set to `true`, a Vagrant box will be created in addition to the virtual machine. If set to `false`, only a virtual machine will be created.
+* `install_homebrew` - If set to `true`, install the Homebrew Package Manager for macOS.
 
 Please remember to validate your configuration before running the Packer script to ensure all variables are set correctly.
