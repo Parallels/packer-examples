@@ -15,6 +15,7 @@ build {
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
     expect_disconnect = true
     except            = !var.create_vagrant_box ? local.vagrant_sources : []
+  }
 
   ## Install the Homebrew Package Manager
   provisioner "shell" {
