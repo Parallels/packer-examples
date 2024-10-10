@@ -14,12 +14,12 @@ source "parallels-ipsw" "sonoma" {
   }
   boot_screen_config {
     boot_command     = ["<wait1s><enter>"]
-    screen_name      = "GetStarted"
+    screen_name      = "GetStarted1"
     matching_strings = ["hola"]
   }
   boot_screen_config {
     boot_command     = ["<wait1s><enter>"]
-    screen_name      = "GetStarted"
+    screen_name      = "GetStarted2"
     matching_strings = ["hallo"]
   }
   boot_screen_config {
@@ -64,12 +64,12 @@ source "parallels-ipsw" "sonoma" {
   }
   boot_screen_config {
     boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar><wait1s><tab><spacebar>"]
-    screen_name      = "TermsAndConditions"
+    screen_name      = "TermsAndConditionsUK"
     matching_strings = ["Terms and Conditions", "macOS Software Licence Agreement"]
   }
   boot_screen_config {
     boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar><wait1s><tab><spacebar>"]
-    screen_name      = "TermsAndConditions"
+    screen_name      = "TermsAndConditionsUS"
     matching_strings = ["Terms and Conditions", "macOS Software License Agreement"] # for US, Licen's'e is used
   }
   boot_screen_config {
