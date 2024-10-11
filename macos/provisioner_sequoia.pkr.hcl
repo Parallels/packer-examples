@@ -3,23 +3,23 @@ source "parallels-ipsw" "sequoia" {
   boot_command     = local.boot_command
 
   boot_screen_config {
-    boot_command     = ["<wait1s><enter>"]
+    boot_command     = ["<wait2s><enter>"]
     screen_name      = "Empty"
     matching_strings = []
   }
   boot_screen_config {
     boot_command     = ["<wait1s><enter>"]
-    screen_name      = "GetStarted"
+    screen_name      = "GetStarted1"
     matching_strings = ["Get Started"]
   }
   boot_screen_config {
     boot_command     = ["<wait1s><enter>"]
-    screen_name      = "GetStarted"
+    screen_name      = "GetStarted2"
     matching_strings = ["hola"]
   }
   boot_screen_config {
     boot_command     = ["<wait1s><enter>"]
-    screen_name      = "GetStarted"
+    screen_name      = "GetStarted3"
     matching_strings = ["hallo"]
   }
   boot_screen_config {
@@ -60,16 +60,16 @@ source "parallels-ipsw" "sequoia" {
   boot_screen_config {
     boot_command     = ["<tab><spacebar>"]
     screen_name      = "SignInWithApplePopup"
-    matching_strings = ["Are you sure you want to skip", "signing in with an Apple ID?"]
+    matching_strings = ["Are you sure you want to skip", "signing in with an Apple"]
   }
   boot_screen_config {
     boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar><wait1s><tab><spacebar>"]
-    screen_name      = "TermsAndConditions"
+    screen_name      = "TermsAndConditionsUK"
     matching_strings = ["Terms and Conditions", "macOS Software Licence Agreement"]
   }
   boot_screen_config {
     boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar><wait1s><tab><spacebar>"]
-    screen_name      = "TermsAndConditions"
+    screen_name      = "TermsAndConditionsUS"
     matching_strings = ["Terms and Conditions", "macOS Software License Agreement"] # for US, Licen's'e is used
   }
   boot_screen_config {
@@ -108,26 +108,34 @@ source "parallels-ipsw" "sequoia" {
     matching_strings = ["Choose your look", "Select an appearance"]
   }
   boot_screen_config {
-    boot_command = [
-      "<leftCtrlOn><f7><leftCtrlOff>",                                                  #enable keyboard navigation
-      "<leftSuperOn><spacebar><leftSuperOff>System<spacebar>Settings<enter><wait5s>",   #open system settings
-      "<up><wait><tab><wait><leftShiftOn><tab><tab><tab><tab><leftShiftOff><spacebar>", #sharing
-    ]
+    boot_command     =  [
+      "<leftCtrlOn><f7><leftCtrlOff>", # Enable keyboard navigation
+      "<leftShiftOn><leftSuperOn>G<leftSuperOff><leftShiftOff>/Applications/Utilities/Terminal.app<enter><leftSuperOn>o<leftSuperOff>", # Open terminal
+      "open<spacebar>'x-apple.systempreferences:com.apple.preferences.sharing?Services_RemoteLogin'<enter><wait6s>", # Open sharing settings
+      "<spacebar><leftShiftOn><tab><leftShiftOff><spacebar><leftSuperOn>q<leftSuperOff>", # Turn on remote login
+      "sudo visudo /private/etc/sudoers.d/${local.ssh_username}<enter><wait2s>",
+      "${local.ssh_password}<enter><wait2s>",
+      "i<wait>${local.ssh_username} ALL = (ALL) NOPASSWD: ALL",
+      "<esc>:wq<enter><wait2s><leftSuperOn>q<leftSuperOff>", # Turn on passwordless sudo and quit terminal
+      "<leftShiftOn><leftSuperOn>G<leftSuperOff><leftShiftOff>/Volumes/Parallels<spacebar>Tools/Install.app<enter><leftSuperOn>o<leftSuperOff>" #Initiate tools installation
+      ]
     screen_name      = "Desktop"
     matching_strings = ["Finder", "Go"]
+    execute_only_once = true
   }
   boot_screen_config {
-    boot_command = ["<leftShiftOn><tab><tab><tab><tab><tab><tab><leftShiftOff><spacebar>", #remote login on
-      "<leftSuperOn><spacebar><leftSuperOff>terminal<enter>"                               #open terminal
-    ]
-    screen_name      = "Sharing"
-    matching_strings = ["File Sharing", "Media Sharing", "Screen Sharing"]
-  }
-  boot_screen_config {
-    boot_command     = ["<spacebar><wait1s><enter>"] # This is for PD19 tools UI
+    boot_command     = [
+      "<leftShiftOn><leftSuperOn>G<leftSuperOff><leftShiftOff>/Applications/Utilities/Terminal.app<enter><leftSuperOn>o<leftSuperOff>", # Open terminal
+      "sudo<spacebar>reboot<enter>${local.ssh_password}<enter>"  # Reboot
+      ] 
     screen_name      = "PDInstalled"
     matching_strings = ["Parallels Tools have been", "Installed successfully"]
     is_last_screen   = true
+  }
+  boot_screen_config {
+    boot_command     = ["${local.ssh_password}<enter>"]
+    screen_name      = "InstallPassword"
+    matching_strings = ["Install", "Install wants to make changes"]
   }
   boot_screen_config {
     boot_command     = ["<spacebar>"]
@@ -142,14 +150,9 @@ source "parallels-ipsw" "sequoia" {
     is_last_screen   = true
   }
   boot_screen_config {
-    boot_command = ["sudo visudo /private/etc/sudoers.d/${local.ssh_username}<enter><wait2s>",
-      "${local.ssh_password}<enter><wait2s>",
-      "i<wait>${local.ssh_username} ALL = (ALL) NOPASSWD: ALL",
-      "<esc>:wq<enter><wait2s>",
-      "sudo /Volumes/Parallels\\ Tools/Install.app/Contents/MacOS/PTIAgent<enter>"
-    ]
-    screen_name      = "Terminal"
-    matching_strings = ["Terminal", "${local.ssh_username}@", "Last login:"]
+    boot_command     = ["<wait3s><spacebar>"]
+    screen_name      = "WelcomeScreen"
+    matching_strings = ["Welcome to mac"]
   }
 
   boot_wait        = "${var.boot_wait}"

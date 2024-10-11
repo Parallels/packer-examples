@@ -9,17 +9,17 @@ source "parallels-ipsw" "ventura" {
   }
   boot_screen_config {
     boot_command     = ["<wait1s><enter>"]
-    screen_name      = "GetStarted"
+    screen_name      = "GetStarted1"
     matching_strings = ["Get Started"]
   }
   boot_screen_config {
     boot_command     = ["<wait1s><enter>"]
-    screen_name      = "GetStarted"
+    screen_name      = "GetStarted2"
     matching_strings = ["hola"]
   }
   boot_screen_config {
     boot_command     = ["<wait1s><enter>"]
-    screen_name      = "GetStarted"
+    screen_name      = "GetStarted3"
     matching_strings = ["hallo"]
   }
   boot_screen_config {
