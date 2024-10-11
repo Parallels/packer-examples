@@ -15,7 +15,7 @@ variable "user" {
 
 variable "version" {
   type    = string
-  default = "23.04"
+  default = "24.04.1"
 }
 
 variable "machine_name" {
