@@ -111,13 +111,6 @@ source "parallels-ipsw" "sequoia" {
     boot_command     =  [
       "<leftCtrlOn><f7><leftCtrlOff>", # Enable keyboard navigation
       "<leftShiftOn><leftSuperOn>G<leftSuperOff><leftShiftOff>/Applications/Utilities/Terminal.app<enter><leftSuperOn>o<leftSuperOff>", # Open terminal
-      "open<spacebar>'x-apple.systempreferences:com.apple.preferences.sharing?Services_RemoteLogin'<enter><wait6s>", # Open sharing settings
-      "<spacebar><leftShiftOn><tab><leftShiftOff><spacebar><leftSuperOn>q<leftSuperOff>", # Turn on remote login
-      "sudo visudo /private/etc/sudoers.d/${local.ssh_username}<enter><wait2s>",
-      "${local.ssh_password}<enter><wait2s>",
-      "i<wait>${local.ssh_username} ALL = (ALL) NOPASSWD: ALL",
-      "<esc>:wq<enter><wait2s><leftSuperOn>q<leftSuperOff>", # Turn on passwordless sudo and quit terminal
-      "<leftShiftOn><leftSuperOn>G<leftSuperOff><leftShiftOff>/Volumes/Parallels<spacebar>Tools/Install.app<enter><leftSuperOn>o<leftSuperOff>" #Initiate tools installation
       ]
     screen_name      = "Desktop"
     matching_strings = ["Finder", "Go"]
@@ -125,15 +118,40 @@ source "parallels-ipsw" "sequoia" {
   }
   boot_screen_config {
     boot_command     = [
+      "sudo visudo /private/etc/sudoers.d/${local.ssh_username}<enter><wait2s>",
+      "${local.ssh_password}<enter><wait2s>",
+      "i<wait>${local.ssh_username} ALL = (ALL) NOPASSWD: ALL",
+      "<esc>:wq<enter><wait2s>", # Turn on passwordless sudo and quit terminal
+      "open<spacebar>'x-apple.systempreferences:com.apple.preferences.sharing?Services_RemoteLogin'<enter>", # Open sharing settings
+      ]
+    screen_name      = "Terminal"
+    matching_strings = ["Terminal", "Last login", "Virtual-Machine"]
+    execute_only_once = true
+  }
+  boot_screen_config {
+    boot_command     = [
+      "<spacebar><leftShiftOn><tab><leftShiftOff><spacebar><leftSuperOn>q<leftSuperOff><wait2s><leftSuperOn>h<leftSuperOff>", # Enable remote login and close settings, minimize terminal
+      "<leftShiftOn><leftSuperOn>G<leftSuperOff><leftShiftOff>/Volumes/Parallels<spacebar>Tools/Install.app<enter><leftSuperOn>o<leftSuperOff>" #Initiate tools installation 
+      ]
+    screen_name      = "RemoteLoginScreen"
+    matching_strings = ["Remote Login", "Allow full disk access for"]
+  }
+  boot_screen_config {
+    boot_command     = [
       "<leftShiftOn><leftSuperOn>G<leftSuperOff><leftShiftOff>/Applications/Utilities/Terminal.app<enter><leftSuperOn>o<leftSuperOff>", # Open terminal
-      "sudo<spacebar>reboot<enter>${local.ssh_password}<enter>"  # Reboot
+      "<wait5s>sudo<spacebar>reboot<enter>${local.ssh_password}<enter>"  # Reboot
       ] 
     screen_name      = "PDInstalled"
     matching_strings = ["Parallels Tools have been", "Installed successfully"]
-    is_last_screen   = true
+    is_last_screen = true
   }
   boot_screen_config {
-    boot_command     = ["${local.ssh_password}<enter>"]
+    boot_command     = ["<wait1s>"]
+    screen_name      = "InstallToolsInit"
+    matching_strings = ["Installing Parallels Tools"]
+  }
+  boot_screen_config {
+    boot_command     = ["<wait5s>${local.ssh_password}<enter>"]
     screen_name      = "InstallPassword"
     matching_strings = ["Install", "Install wants to make changes"]
   }
