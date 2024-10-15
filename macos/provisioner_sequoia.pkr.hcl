@@ -129,6 +129,11 @@ source "parallels-ipsw" "sequoia" {
     execute_only_once = true
   }
   boot_screen_config {
+    boot_command     =  ["<wait5s>"]
+    screen_name      = "SharingLoading" # In heavy load systems, it will take some time for remote login screen to appear.
+    matching_strings = ["Sharing", "File", "Media", "Bluetooth"]
+  }
+  boot_screen_config {
     boot_command     = [
       "<spacebar><leftShiftOn><tab><leftShiftOff><spacebar><leftSuperOn>q<leftSuperOff><wait2s><leftSuperOn>h<leftSuperOff>", # Enable remote login and close settings, minimize terminal
       "<leftShiftOn><leftSuperOn>G<leftSuperOff><leftShiftOff>/Volumes/Parallels<spacebar>Tools/Install.app<enter><leftSuperOn>o<leftSuperOff>" #Initiate tools installation 
