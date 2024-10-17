@@ -1,7 +1,7 @@
 #!/bin/sh -eux
 
 # set a default HOME_DIR environment variable if not set
-HOME_DIR="${HOME_DIR:-/home/$USERNAME}"
+HOME_DIR="${HOME_DIR:-/home/$USER}"
 
 pubkey_url="https://raw.githubusercontent.com/hashicorp/vagrant/main/keys/vagrant.pub"
 mkdir -p "$HOME_DIR"/.ssh
@@ -18,5 +18,5 @@ fi
 
 wget --no-check-certificate "$pubkey_url" -O "$HOME_DIR"/authorized_keys
 
-chown -R $USERNAME "$HOME_DIR"/.ssh
+chown -R "$USER" "$HOME_DIR"/.ssh
 chmod -R go-rwsx "$HOME_DIR"/.ssh
