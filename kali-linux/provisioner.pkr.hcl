@@ -16,7 +16,7 @@ locals {
     "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
     "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
     "<bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "auto=true url=http://{{.HTTPIP}}:{{.HTTPPort}}/kali-linux/preseed.cfg priority=critical<f10><wait>"
+    "auto=true url=http://{{.HTTPIP}}:{{.HTTPPort}}/kali-linux/./preseed.cfg priority=critical<f10><wait>"
   ] : var.boot_command
 
   iso_url = var.iso_url == "" ? "https://cdimage.kali.org/kali-${var.version == "" ? "2023.3" : var.version}/kali-linux-${var.version == "" ? "2023.3" : var.version}-installer-arm64.iso" : var.iso_url
@@ -52,6 +52,7 @@ source "parallels-iso" "image" {
   http_content = {
     "/kali-linux/meta-data"   = templatefile("${path.root}/../http/kali-linux/meta-data.pkrtpl.hcl", { hostname = "${local.hostname}" })
     "/kali-linux/preseed.cfg" = templatefile("${path.root}/../http/kali-linux/preseed.cfg.pkrtpl.hcl", { username = "${local.username}", password = "${local.password}", hostname = "${local.hostname}", desktop = "${var.desktop}" })
+    "/kali-linux/post-install.sh" = file("${path.root}/../http/kali-linux/post-install.sh")
   }
 
   iso_url          = local.iso_url

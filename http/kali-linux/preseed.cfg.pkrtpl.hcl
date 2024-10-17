@@ -129,7 +129,7 @@ d-i cdrom-detect/eject boolean true
 
 # Post-install commands
 d-i preseed/late_command string \
-    in-target curl -L -o /root/post-install.sh "https://raw.githubusercontent.com/Parallels/packer-examples/main/http/kali/post-install.sh"; \
+    in-target curl -L -o /root/post-install.sh "`cat /proc/cmdline | sed -n 's/.*url=\([^ ]*\)\/\.\/*.*$/\1/p'`/post-install.sh"; \
     in-target chmod +x /root/post-install.sh; \
     in-target /root/post-install.sh; \
     echo "${username} ALL=(ALL:ALL) NOPASSWD:ALL" > /target/etc/sudoers.d/${username} && chmod 0440 /target/etc/sudoers.d/${username}
