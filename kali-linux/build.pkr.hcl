@@ -69,7 +69,7 @@ build {
       "USERNAME=${local.username}",
     ]
     scripts = [
-      "${path.root}/../scripts/kali-linux/base/password_change.sh",
+      "${path.root}/../scripts/kali-linux/base/remove_password.sh",
     ]
 
     execute_command   = "echo 'kali-linux' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
