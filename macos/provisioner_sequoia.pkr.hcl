@@ -58,6 +58,11 @@ source "parallels-ipsw" "sequoia" {
     matching_strings = ["Sign in with your apple", "Sign in to use iCloud"]
   }
   boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><tab><leftShiftOff><spacebar>"]
+    screen_name      = "SignInToApple"
+    matching_strings = ["Sign In to Your Apple Account", "Sign in to use iCloud"]
+  }
+  boot_screen_config {
     boot_command     = ["<tab><spacebar>"]
     screen_name      = "SignInWithApplePopup"
     matching_strings = ["Are you sure you want to skip", "signing in with an Apple"]
