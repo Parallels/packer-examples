@@ -1,11 +1,25 @@
 source "parallels-ipsw" "sequoia" {
   output_directory = local.output_dir
-  boot_command     = ["<wait10s><enter>"]
 
   boot_screen_config {
     boot_command     = ["<wait2s><enter>"]
-    screen_name      = "Welcome"
+    screen_name      = "Empty"
     matching_strings = []
+  }
+  boot_screen_config {
+    boot_command     = ["<wait1s><enter>"]
+    screen_name      = "GetStarted1"
+    matching_strings = ["Get Started"]
+  }
+  boot_screen_config {
+    boot_command     = ["<wait1s><enter>"]
+    screen_name      = "GetStarted2"
+    matching_strings = ["hola"]
+  }
+  boot_screen_config {
+    boot_command     = ["<wait1s><enter>"]
+    screen_name      = "GetStarted3"
+    matching_strings = ["hallo"]
   }
   boot_screen_config {
     boot_command     = ["<tab><spacebar>"]
@@ -16,6 +30,11 @@ source "parallels-ipsw" "sequoia" {
     boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
     screen_name      = "Country"
     matching_strings = ["Select Your Country or Region"]
+  }
+  boot_screen_config {
+    boot_command     = ["<tab><tab><tab><spacebar>"]
+    screen_name      = "MigrationAssistant"
+    matching_strings = ["Migration Assistant", "From a Mac", "Time Machine backup"]
   }
   boot_screen_config {
     boot_command = ["<tab><tab><tab><tab><spacebar><tab><tab><spacebar>"]
@@ -44,7 +63,7 @@ source "parallels-ipsw" "sequoia" {
   }
   boot_screen_config {
     boot_command     = ["<leftCtrlOn><f7><leftCtrlOff><wait1s><leftShiftOn><tab><leftShiftOff><spacebar>"]
-    screen_name      = "SignInWithApple"
+    screen_name      = "SignInToApple"
     matching_strings = ["Sign in to your apple", "Sign in to use iCloud"]
   }
   boot_screen_config {
