@@ -196,7 +196,6 @@ source "parallels-ipsw" "sequoia" {
     screen_name      = "WelcomeScreen"
     matching_strings = ["Welcome to mac"]
   }
-#
   boot_wait        = "${var.boot_wait}"
   shutdown_command = "sudo shutdown -h now"
   ipsw_url         = local.ipsw_url
