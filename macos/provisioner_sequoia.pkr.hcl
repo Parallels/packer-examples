@@ -1,5 +1,6 @@
 source "parallels-ipsw" "sequoia" {
   output_directory = local.output_dir
+  boot_command     = local.boot_command
 
   boot_screen_config {
     boot_command     = ["<wait2s><enter>"]
@@ -22,9 +23,9 @@ source "parallels-ipsw" "sequoia" {
     matching_strings = ["hallo"]
   }
   boot_screen_config {
-    boot_command     = ["<tab><spacebar>"]
+    boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
     screen_name      = "Language"
-    matching_strings = ["English", "Language"]
+    matching_strings = ["English", "Language", "Australia", "India"]
   }
   boot_screen_config {
     boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
