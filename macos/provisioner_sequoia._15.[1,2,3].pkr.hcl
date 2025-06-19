@@ -1,4 +1,4 @@
-source "parallels-ipsw" "sequoia" {
+source "parallels-ipsw" "sequoia_15_1_to_3" {
   output_directory = local.output_dir
   boot_command     = local.boot_command
 
@@ -33,16 +33,6 @@ source "parallels-ipsw" "sequoia" {
     matching_strings = ["Select Your Country or Region"]
   }
   boot_screen_config {
-    boot_command     = ["<tab><tab><tab><spacebar>"]
-    screen_name      = "MigrationAssistant"
-    matching_strings = ["Migration Assistant", "From a Mac", "Time Machine backup"]
-  }
-  boot_screen_config {
-    boot_command = ["<tab><tab><tab><tab><spacebar><tab><tab><spacebar>"]
-    screen_name = "Data"
-    matching_strings = ["transfer", "information"]
-  }
-  boot_screen_config {
     boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
     screen_name      = "SpokenLanguages"
     matching_strings = ["Written and Spoken Languages"]
@@ -58,19 +48,19 @@ source "parallels-ipsw" "sequoia" {
     matching_strings = ["Data", "Privacy", "This icon appears"]
   }
   boot_screen_config {
-    boot_command     = ["${local.ssh_username}<tab><tab>${local.ssh_password}<tab>${local.ssh_password}<tab><tab><tab><tab><spacebar>"]
-    screen_name      = "CreateAccount"
-    matching_strings = ["Create a Mac Account", "The password you create here"]
+    boot_command     = ["<tab><tab><tab><spacebar>"]
+    screen_name      = "MigrationAssistant"
+    matching_strings = ["Migration Assistant", "From a Mac", "Time Machine backup"]
   }
   boot_screen_config {
-    boot_command     = ["<leftCtrlOn><f7><leftCtrlOff><wait1s><leftShiftOn><tab><leftShiftOff><spacebar>"]
-    screen_name      = "SignInToApple"
-    matching_strings = ["Sign in to your apple", "Sign in to use iCloud"]
-  }
-  boot_screen_config {
-    boot_command     = ["<leftCtrlOn><f7><leftCtrlOff><wait1s><leftShiftOn><tab><leftShiftOff><spacebar>"]
+    boot_command     = ["<leftShiftOn><tab><tab><leftShiftOff><spacebar>"]
     screen_name      = "SignInWithApple"
     matching_strings = ["Sign in with your apple", "Sign in to use iCloud"]
+  }
+  boot_screen_config {
+    boot_command     = ["<leftShiftOn><tab><tab><leftShiftOff><spacebar>"]
+    screen_name      = "SignInToApple"
+    matching_strings = ["Sign In to Your Apple Account", "Sign in to use iCloud"]
   }
   boot_screen_config {
     boot_command     = ["<tab><spacebar>"]
@@ -86,6 +76,11 @@ source "parallels-ipsw" "sequoia" {
     boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar><wait1s><tab><spacebar>"]
     screen_name      = "TermsAndConditionsUS"
     matching_strings = ["Terms and Conditions", "macOS Software License Agreement"] # for US, Licen's'e is used
+  }
+  boot_screen_config {
+    boot_command     = ["${local.ssh_username}<tab><tab>${local.ssh_password}<tab>${local.ssh_password}<tab><tab><tab><spacebar>"]
+    screen_name      = "CreateAccount"
+    matching_strings = ["Create a Computer Account", "Fill out the following information"]
   }
   boot_screen_config {
     boot_command     = ["<leftShiftOn><tab><leftShiftOff><spacebar><wait2s><tab><spacebar>"]
@@ -118,17 +113,8 @@ source "parallels-ipsw" "sequoia" {
     matching_strings = ["Choose your look", "Select an appearance"]
   }
   boot_screen_config {
-    boot_command = ["<leftShiftOn><tab><leftShiftOff><spacebar>"]
-    screen_name = "Update"
-    matching_strings = ["Update Mac Automatically"]
-  }
-  boot_screen_config {
-    boot_command = ["<spacebar>"]
-    screen_name = "Welcome to mac"
-    matching_strings = ["Welcome to Mac", "continue"]
-  }
-  boot_screen_config {
     boot_command     =  [
+      "<leftCtrlOn><f7><leftCtrlOff>", # Enable keyboard navigation
       "<leftShiftOn><leftSuperOn>G<leftSuperOff><leftShiftOff>/Applications/Utilities/Terminal.app<enter><leftSuperOn>o<leftSuperOff>", # Open terminal
       ]
     screen_name      = "Desktop"
@@ -196,6 +182,7 @@ source "parallels-ipsw" "sequoia" {
     screen_name      = "WelcomeScreen"
     matching_strings = ["Welcome to mac"]
   }
+
   boot_wait        = "${var.boot_wait}"
   shutdown_command = "sudo shutdown -h now"
   ipsw_url         = local.ipsw_url

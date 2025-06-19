@@ -16,7 +16,7 @@ locals {
 
   machine_name = var.machine_name == "" ? "macOs-14.5_23F79" : var.machine_name
   addons       = join(",", var.addons)
-  version_source = var.version == "monterey" ? "parallels-ipsw.monterey" : var.version == "ventura" ? "parallels-ipsw.ventura" : var.version == "sonoma" ? "parallels-ipsw.sonoma" : "parallels-ipsw.sequoia"
+  version_source = var.version == "monterey" ? "parallels-ipsw.monterey" : var.version == "ventura" ? "parallels-ipsw.ventura" : var.version == "sonoma" ? "parallels-ipsw.sonoma" : "${lookup(var.os_versions_to_source_map, var.version, "parallels-ipsw.sequoia_15_3_plus")}"
   sources = [
     var.macvm_path == "" ? local.version_source : "parallels-macvm.image"
   ]
