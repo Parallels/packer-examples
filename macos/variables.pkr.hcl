@@ -11,6 +11,9 @@ variable "version" {
 variable "os_versions_to_source_map" {
   type = map(string)
   default = {
+    "monterey" = "parallels-ipsw.monterey"
+    "ventura" = "parallels-ipsw.ventura"
+    "sonoma" = "parallels-ipsw.sonoma"
     "sequoia" = "parallels-ipsw.sequoia_15_1_to_3"
     "sequoia_15.1" = "parallels-ipsw.sequoia_15_1_to_3"
     "sequoia_15.2" = "parallels-ipsw.sequoia_15_1_to_3"
