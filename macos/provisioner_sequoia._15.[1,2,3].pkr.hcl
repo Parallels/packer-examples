@@ -1,4 +1,4 @@
-source "parallels-ipsw" "sequoia" {
+source "parallels-ipsw" "sequoia_15_1_to_3" {
   output_directory = local.output_dir
   boot_command     = local.boot_command
 
