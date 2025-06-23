@@ -8,7 +8,8 @@ This guide provides detailed explanations of the variables that can be set in th
   * `monterey`
   * `ventura`
   * `sonoma`
-  * `sequoia`
+  * `sequoia` - Will always choose latest version of sequoia.
+  * `sequoia_15.x` - Mention a specific version in sequoia. Installation steps were different for each version in sequoia, e.g., sequoia_15.1, sequoia_15.2 ... sequoia_15.5.
 
 * `user` - This variable defines the user account to be created on the virtual machine. It contains two keys:
   * `username` - Specifies the username for the user.
