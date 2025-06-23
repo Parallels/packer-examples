@@ -57,7 +57,7 @@ addons = [
 create_vagrant_box = false
 ```
 
-Refer to the detailed [variables guide](./VARIABLES.md) for information on each variable.
+Refer to the detailed [variables guide](./variables.md) for information on each variable.
 
 ## New! Power of OCR in macOS automation
 
