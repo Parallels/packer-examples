@@ -101,7 +101,7 @@ d-i partman/confirm_write_new_label boolean true
 # Packages
 tasksel tasksel/first multiselect standard
 d-i pkgsel/include string \
-    curl git kali-linux-default kali-desktop-${desktop}
+    curl git kali-desktop-${desktop}
 
 # Grub
 d-i grub-installer/only_debian boolean true
