@@ -13,7 +13,7 @@ variable "user" {
 
 variable "version" {
   type    = string
-  default = "2023.3"
+  default = "2025.3"
 }
 
 variable "machine_name" {

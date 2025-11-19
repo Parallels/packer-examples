@@ -21,7 +21,7 @@ locals {
 
   iso_url = var.iso_url == "" ? "https://cdimage.kali.org/kali-${var.version == "" ? "2023.3" : var.version}/kali-linux-${var.version == "" ? "2023.3" : var.version}-installer-arm64.iso" : var.iso_url
 
-  iso_checksum = var.iso_checksum == "" ? "sha256:41e3997b31639ec45363181d4fff68a2b6a1a07ed2e3458f1bcd11f3f2d9db9c" : var.iso_checksum
+  iso_checksum = var.iso_checksum == "" ? "sha256:a3f220224810d1111661040d64ddb62d0e68d2b7ed97bfd5fb3e5dd5768d02d9" : var.iso_checksum
   ssh_username = var.create_vagrant_box ? "vagrant" : var.ssh_username == "" ? var.user.username : var.ssh_username
   ssh_password = var.create_vagrant_box ? "vagrant" : var.ssh_password == "" ? var.user.password : var.ssh_password
 
