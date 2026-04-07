@@ -4,16 +4,16 @@ user = {
   password              = "parallels",
   force_password_change = true,
 }
-version      = "22.04.3"
-machine_name = "ubuntu_22.04_LTS"
-hostname     = "ubuntu-22.04"
+version      = "25.10"
+machine_name = "ubuntu_25.10"
+hostname     = "ubuntu-25.10"
 machine_specs = {
   cpus      = 2,
   memory    = 2048,
   disk_size = "65536",
 }
-iso_url      = ""
-iso_checksum = ""
+iso_url      = "/Users/zayaan.dulmeer/Downloads/ubuntu-25.10-live-server-arm64.iso"
+iso_checksum = "sha256:ecf579664c0be9e4a68ae7b617399ce943c2dee49eb1fcc6702a5671a4f88320"
 addons = [
   "desktop"
 ]

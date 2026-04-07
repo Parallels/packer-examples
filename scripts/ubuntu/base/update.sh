@@ -32,4 +32,7 @@ apt-get -y update;
 echo "upgrade all installed packages incl. kernel and kernel headers"
 apt-get -y dist-upgrade -o Dpkg::Options::="--force-confnew";
 
+echo "Rebooting the system to apply kernel updates..."
+sync
+sleep 5
 reboot
