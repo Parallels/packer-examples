@@ -1,6 +1,27 @@
 build {
   sources = local.sources
 
+  # PARALLELS TOOLS INSTALLATION 
+  provisioner "shell" {
+    # Increase to 60s: macOS 26 needs extra time to mount the Tools ISO after login
+    pause_before = "60s" 
+    
+    inline = [
+      "echo 'Cleaning up restored sessions...'",
+      # Force-closes any 'stuck' or 'restored' Terminal windows
+      "sudo pkill -x 'Terminal' || true", 
+      "sleep 5",
+      "echo 'Starting silent Parallels Tools Installation via SSH...'",
+      # Direct silent install command
+      "sudo /Volumes/Parallels\\ Tools/Install.app/Contents/MacOS/PTIAgent --install",
+      "echo 'Installation triggered. The .pvm will be generated after the final reboot.'"
+    ]
+    # Uses your local.ssh_password to authenticate the sudo commands
+    execute_command = "echo '${local.ssh_password}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    # Expect a disconnect because the installer will trigger a system restart
+    expect_disconnect = true 
+  }
+  
   ## Install the insecure Vagrant ssh key, if we're building a Vagrant box
   provisioner "shell" {
     environment_vars = [

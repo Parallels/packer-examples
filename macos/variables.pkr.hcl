@@ -3,7 +3,7 @@
 
 variable "version" {
   type    = string
-  default = "sonoma"
+  default = "tahoe"
 }
 // Any future versions of macOS should be added here.
 // if there is a change in installation process, a new provisioner file should be created
@@ -20,6 +20,7 @@ variable "os_versions_to_source_map" {
     "sequoia_15.4" = "parallels-ipsw.sequoia_15_3_plus"
     "sequoia_15.5" = "parallels-ipsw.sequoia_15_3_plus"
     "sequoia" = "parallels-ipsw.sequoia_15_3_plus"
+    "tahoe"        = "parallels-ipsw.tahoe_26"
   }
 }
 
