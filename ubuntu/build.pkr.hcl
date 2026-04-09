@@ -107,6 +107,34 @@ build {
     expect_disconnect = true
   }
 
+  provisioner "shell" {
+    environment_vars = [
+      "HOME_DIR=/home/${local.username}",
+      "USERNAME=${local.username}",
+    ]
+    scripts = [
+      "${path.root}/../scripts/ubuntu/base/password_change.sh",
+    ]
+
+    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    except            = !local.force_password_change ? ["parallels-iso.image"] : []
+    expect_disconnect = true
+  }
+
+  provisioner "shell" {
+    environment_vars = [
+      "HOME_DIR=/home/${local.username}",
+      "USERNAME=${local.username}",
+    ]
+    scripts = [
+      "${path.root}/../scripts/ubuntu/base/clean_user_snap_folder.sh",
+    ]
+
+    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    expect_disconnect = true
+  }
+
+
   post-processor "vagrant" {
     compression_level    = 9
     keep_input_artifact  = false
