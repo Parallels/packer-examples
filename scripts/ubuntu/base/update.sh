@@ -26,6 +26,18 @@ echo "remove the unattended-upgrades and ubuntu-release-upgrader-core packages"
 rm -rf /var/log/unattended-upgrades;
 apt-get -y purge unattended-upgrades ubuntu-release-upgrader-core;
 
+# Time sync fix for ubuntu 22.04
+echo "==> Attempting to sync system clock..."
+# Use || true so the script doesn't exit if these fail
+hwclock --hctosys || true 
+
+# Force systemd to restart time sync
+systemctl restart systemd-timesyncd || true
+
+# Give it a moment and check the date in the logs
+sleep 10
+date
+
 echo "update the package list"
 apt-get -y update;
 
