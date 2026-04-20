@@ -3,7 +3,7 @@ user = {
   encrypted_password = "$6$parallels$tb6hm4RSqzwG3j51DSzdFD7Zw3Fxy/x5aen.Yvud7IfLqarIxMEuuM8efQy0gO.pHhT.lIz9tNYoppTGBGCsB/"
   password           = "parallels"
 }
-version      = "2025.3"
+version      = "2026.1"
 machine_name = "Kali Linux 2025.3"
 hostname     = "kali-2025-3"
 machine_specs = {

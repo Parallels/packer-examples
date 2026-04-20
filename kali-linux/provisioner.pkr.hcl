@@ -19,9 +19,9 @@ locals {
     "auto=true url=http://{{.HTTPIP}}:{{.HTTPPort}}/kali-linux/./preseed.cfg priority=critical<f10><wait>"
   ] : var.boot_command
 
-  iso_url = var.iso_url == "" ? "https://cdimage.kali.org/kali-${var.version == "" ? "2023.3" : var.version}/kali-linux-${var.version == "" ? "2023.3" : var.version}-installer-arm64.iso" : var.iso_url
+  iso_url = var.iso_url == "" ? "https://cdimage.kali.org/kali-${var.version == "" ? "2026.1" : var.version}/kali-linux-${var.version == "" ? "2026.1" : var.version}-installer-arm64.iso" : var.iso_url
 
-  iso_checksum = var.iso_checksum == "" ? "sha256:a3f220224810d1111661040d64ddb62d0e68d2b7ed97bfd5fb3e5dd5768d02d9" : var.iso_checksum
+  iso_checksum = var.iso_checksum == "" ? "file:https://cdimage.kali.org/kali-${var.version == "" ? "2026.1" : var.version}/SHA256SUMS" : var.iso_checksum
   ssh_username = var.create_vagrant_box ? "vagrant" : var.ssh_username == "" ? var.user.username : var.ssh_username
   ssh_password = var.create_vagrant_box ? "vagrant" : var.ssh_password == "" ? var.user.password : var.ssh_password
 
