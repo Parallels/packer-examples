@@ -1,7 +1,11 @@
 #!/bin/sh -eux
 
-sed -i -e '/Defaults\s\+env_reset/a Defaults\texempt_group=sudo' /etc/sudoers;
+#Enable the whitelist (Removed exempt_group as sudo-rs doesn't support it)
+sed -i -e '/Defaults\s\+env_reset/a Defaults\tenv_keep+="USERNAME HOME_DIR PACKER_BUILDER_TYPE ADDONS"' /etc/sudoers
 
-# Set up password-less sudo for the ubuntu user
-echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >/etc/sudoers.d/99_$USERNAME;
-chmod 440 /etc/sudoers.d/99_$USERNAME;
+#Get the username safely
+REAL_USER=${USERNAME:-$(whoami)}
+
+# Set up password-less sudo
+echo "$REAL_USER ALL=(ALL) NOPASSWD:ALL" > "/etc/sudoers.d/99_$REAL_USER"
+chmod 440 "/etc/sudoers.d/99_$REAL_USER"

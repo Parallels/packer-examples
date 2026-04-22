@@ -1,25 +1,30 @@
-#!/bin/bash
+#!/bin/bash -eux
 
-# Check if an argument was provided
-if [ -z "$ADDONS" ]; then
-  echo "Please provide a comma-separated list of values"
-  exit 1
+SELECTED_ADDONS="${ADDONS:-}"
+
+BASE_DIR=$(cd "$(dirname "$0")" && pwd)
+
+if [ -z "$SELECTED_ADDONS" ]; then
+  echo "No addons provided. Skipping."
+  exit 0
 fi
 
-echo "Installing addons: $ADDONS"
+echo "Installing addons: $SELECTED_ADDONS from $BASE_DIR"
 
-# Convert the argument to an array
-IFS=',' read -ra values <<<"$ADDONS"
+IFS=',' read -ra values <<< "$SELECTED_ADDONS"
 
-# Loop through each value in the array
 for value in "${values[@]}"; do
+  value=$(echo "$value" | xargs)
+  
   if [ -n "$value" ]; then
-    # Check if a script with the same name exists
-    if [ -f "$ADDONS_DIR/scripts/$value.sh" ]; then
-      # Execute the script
-      bash "$ADDONS_DIR/scripts/$value.sh"
+    SCRIPT_PATH="$BASE_DIR/scripts/$value.sh"
+    
+    if [ -f "$SCRIPT_PATH" ]; then
+      echo "==> Executing addon script: $value"
+      bash "$SCRIPT_PATH"
     else
-      echo "Script $value.sh not found on the script folder, full path .$ADDONS_DIR/scripts/$value.sh"
+      echo "ERROR: Script not found at $SCRIPT_PATH"
+      exit 1
     fi
   fi
 done

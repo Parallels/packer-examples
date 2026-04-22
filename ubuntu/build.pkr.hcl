@@ -26,16 +26,16 @@ build {
       "USERNAME=${local.username}",
     ]
     scripts = [
+      "${path.root}/../scripts/ubuntu/base/sudoers.sh",
       "${path.root}/../scripts/ubuntu/base/update.sh",
       "${path.root}/../scripts/ubuntu/base/sshd.sh",
       "${path.root}/../scripts/ubuntu/base/networking.sh",
-      "${path.root}/../scripts/ubuntu/base/sudoers.sh",
       "${path.root}/../scripts/ubuntu/base/systemd.sh",
       "${path.root}/../scripts/ubuntu/base/parallels.sh",
       "${path.root}/../scripts/ubuntu/base/parallels_folders.sh",
     ]
 
-    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
+    execute_command = "echo '${local.username}' | {{ .Vars }} sudo -S -E bash -eux '{{ .Path }}'"
     expect_disconnect = true
   }
 
@@ -56,7 +56,7 @@ build {
 
   provisioner "file" {
     source      = "${path.root}/../scripts/ubuntu/addons"
-    destination = "/parallels-tools"
+    destination = "/tmp/addons_upload" 
     direction   = "upload"
     except      = length(var.addons) > 0 ? [] : ["parallels-iso.image"]
   }
@@ -65,18 +65,34 @@ build {
     environment_vars = [
       "HOME_DIR=/home/${local.username}",
       "USERNAME=${local.username}",
-      "ADDONS=${local.addons}",
+      "ADDONS=${join(",", var.addons)}",
       "ADDONS_DIR=/parallels-tools/addons"
     ]
 
-    scripts = [
-      "${path.root}/../scripts/ubuntu/addons/install.sh",
+    inline = [
+      "sudo mkdir -p /parallels-tools/addons",
+      "sudo mv /tmp/addons_upload/* /parallels-tools/addons/",
+      "sudo chown -R ${local.username}:${local.username} /parallels-tools",
+      "bash -eux /parallels-tools/addons/install.sh"
     ]
 
     execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E bash -eux '{{ .Path }}'"
     expect_disconnect = true
     timeout           = "3h"
     except            = length(var.addons) > 0 ? [] : ["parallels-iso.image"]
+  }
+
+  
+  provisioner "shell" {
+    environment_vars = [
+      "HOME_DIR=/home/${local.username}",
+      "USERNAME=${local.username}",
+    ]
+    scripts = [
+      "${path.root}/../scripts/ubuntu/base/clean_user_snap_folder.sh",
+    ]
+    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S env USERNAME=${local.username} sh -eux '{{ .Path }}'"
+    expect_disconnect = true
   }
 
   provisioner "shell" {
@@ -87,25 +103,9 @@ build {
     scripts = [
       "${path.root}/../scripts/ubuntu/base/password_change.sh",
     ]
-
-    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
-    except            = !local.force_password_change ? ["parallels-iso.image"] : []
+    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S env USERNAME=${local.username} sh -eux '{{ .Path }}'"
     expect_disconnect = true
   }
-
-  provisioner "shell" {
-    environment_vars = [
-      "HOME_DIR=/home/${local.username}",
-      "USERNAME=${local.username}",
-    ]
-    scripts = [
-      "${path.root}/../scripts/ubuntu/base/clean_user_snap_folder.sh",
-    ]
-
-    execute_command   = "echo '${local.username}' | {{ .Vars }} sudo -S -E sh -eux '{{ .Path }}'"
-    expect_disconnect = true
-  }
-
 
   post-processor "vagrant" {
     compression_level    = 9

@@ -49,7 +49,7 @@ source "parallels-iso" "image" {
     "/ubuntu/preseed.cfg"        = templatefile("${path.root}/../http/ubuntu/preseed.cfg.pkrtpl.hcl", { username = "${local.username}", password = "${local.password}" })
   }
   output_directory = local.output_dir
-  shutdown_command = "echo '${local.username}'|sudo -S shutdown -P now"
+  shutdown_command = "sudo -n poweroff"
   shutdown_timeout = var.shutdown_timeout
   ssh_port         = var.ssh_port
   ssh_username     = local.ssh_username
