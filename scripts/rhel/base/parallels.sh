@@ -13,6 +13,8 @@ parallels-iso|parallels-pvm)
       yum -y install checkpolicy selinux-policy-devel gcc kernel-devel kernel-headers make
     fi
 
+    modprobe loop || echo "Loop module already loaded or built-in"
+
     mkdir -p /tmp/parallels;
     if [ "$(uname -m)" = "aarch64" ] ; then
         mount -o loop "$HOME_DIR"/prl-tools-lin-arm.iso /tmp/parallels;

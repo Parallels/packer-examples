@@ -6,9 +6,8 @@ build {
   # Base System Setup
   provisioner "shell" {
     environment_vars = [
-      "HOME_DIR=/home/${local.username}",
       "USERNAME=${local.username}",
-      "DEFAULT_USERNAME=${local.username}"
+      "HOME_DIR=/home/${local.username}"
     ]
     scripts = [
       "${path.root}/../scripts/fedora/base/sshd.sh",
@@ -60,5 +59,5 @@ build {
     except            = var.create_vagrant_box ? ["parallels-iso.image"] : []
   }
 }
- 
+
  

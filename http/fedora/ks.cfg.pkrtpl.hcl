@@ -20,7 +20,7 @@ part /boot --fstype="ext4" --size=1024
 part / --fstype="ext4" --grow --size=1
  
 # Network & Services
-network --bootproto=dhcp --device=link --activate --onboot=on
+network --bootproto=dhcp --device=link --activate --onboot=on --hostname=${hostname}
 firewall --enabled --ssh
 selinux --permissive
 firstboot --disable

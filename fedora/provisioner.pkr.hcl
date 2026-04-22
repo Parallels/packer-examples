@@ -41,7 +41,7 @@ source "parallels-iso" "image" {
   iso_url             = var.iso_url
 
   http_content = {
-    "/fedora/ks.cfg" = templatefile("${path.root}/../http/redhat/ks.cfg.pkrtpl.hcl", {
+    "/fedora/ks.cfg" = templatefile("${path.root}/../http/fedora/ks.cfg.pkrtpl.hcl", {
       username = "${local.username}",
       password = "${local.password}",
       hostname = "${local.hostname}",

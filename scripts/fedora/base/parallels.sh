@@ -15,7 +15,8 @@ parallels-iso|parallels-pvm)
 
     mkdir -p /tmp/parallels;
     if [ "$(uname -m)" = "aarch64" ] ; then
-        mount -o loop "$HOME_DIR"/prl-tools-lin-arm.iso /tmp/parallels;
+        mount -o loop "$HOME_DIR"/prl-tools-lin-arm.iso /
+        tmp/parallels;
     else
         mount -o loop "$HOME_DIR"/prl-tools-lin.iso /tmp/parallels;
     fi

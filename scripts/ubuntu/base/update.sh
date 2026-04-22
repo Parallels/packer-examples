@@ -1,4 +1,8 @@
 #!/bin/sh -eux
+
+echo "Forcing time sync..."
+sudo systemctl restart systemd-timesyncd
+sleep 15
 export DEBIAN_FRONTEND=noninteractive
 
 echo "disable release-upgrades"

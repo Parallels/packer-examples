@@ -11,8 +11,8 @@ machine_specs = {
   memory    = 4096,
   disk_size = "65536",
 }
-#iso_url            = "https://fedora.c3sl.ufpr.br/linux/releases/42/Server/aarch64/iso/Fedora-Server-dvd-aarch64-42-1.1.iso"
-#iso_checksum       = "sha256:6527d67f98627d3fa973d95475b008b7496bf9800c68fe00e91a4e020505d3c9"
+iso_url            = "https://fedora.c3sl.ufpr.br/linux/releases/42/Server/aarch64/iso/Fedora-Server-dvd-aarch64-42-1.1.iso"
+iso_checksum       = "sha256:6527d67f98627d3fa973d95475b008b7496bf9800c68fe00e91a4e020505d3c9"
 
 
 addons             = []
