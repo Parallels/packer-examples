@@ -1,12 +1,21 @@
 #!/bin/sh -eux
 
 install() {
-  echo "Installing Golang"
+  echo "Installing Go"
+
+  #update package lists
+
   sudo apt-get update
-  sudo apt-get -y install curl git
-  sudo snap install go --classic
+
+  #install Go from Debian repositories (ARM64 compatible)
+
+  sudo apt-get install -y golang-go
+
+  #verify installation
+
   go version
+  
 }
 
-# Starting script
+#Starting script (go 1.24.4)
 install

@@ -2,9 +2,9 @@
 
 install() {
   echo "Installing Podman"
-  sudo apt-get update
+  sudo apt-get update -y
   sudo apt-get -y install podman
-  podman version
+  podman --version
 }
 
 # Starting script

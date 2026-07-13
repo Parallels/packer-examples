@@ -4,7 +4,7 @@ user = {
   password           = "parallels"
 }
 version      = "10"
-machine_name = "CentOS Stream 10"
+machine_name = "CentOS Stream 10 packer"
 hostname     = "CentOS Stream"
 machine_specs = {
   cpus      = 2,
@@ -13,8 +13,8 @@ machine_specs = {
 }
 
 iso_url      = "https://mirror.stream.centos.org/10-stream/BaseOS/aarch64/iso/CentOS-Stream-10-latest-aarch64-boot.iso"
-iso_checksum = "sha256:c898320ca9bc456fd1164499236a12d704fa0b0ddb6e255c2c7a7dd1ace3499a"
+iso_checksum = "sha256:0f532ef8240d0e8529f2894cf888fbf16c5e203acc334de4c2efa6ec13aa2c2c"
 
-addons             = []
+addons             = ["vscode"]
 install_desktop    = true
 create_vagrant_box = false
