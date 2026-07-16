@@ -13,7 +13,7 @@ machine_specs = {
 }
 
 iso_url      = "https://mirror.stream.centos.org/10-stream/BaseOS/aarch64/iso/CentOS-Stream-10-latest-aarch64-boot.iso"
-iso_checksum = "sha256:c898320ca9bc456fd1164499236a12d704fa0b0ddb6e255c2c7a7dd1ace3499a"
+iso_checksum = "sha256:fbed4a9f53477e1bf94296909d1f6567b1a10266898dd74d63dd9f8a018d125c"
 
 addons             = []
 install_desktop    = true
