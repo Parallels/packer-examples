@@ -1,6 +1,5 @@
 #!/bin/sh -eux
 
-#!/bin/sh -eux
 
 install() {
     echo "Installing Docker"
