@@ -9,7 +9,7 @@ locals {
     "<wait>",
     "<up>e<wait>",
     // "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
-    "<down><down><end> inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/rhel/ks.cfg<F10><wait>"
+    "<down><down><end> inst.text inst.ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/rhel/ks.cfg net.ifnames=0 biosdevname=0<F10><wait>"
   ] : var.boot_command
 
   ssh_username = var.create_vagrant_box ? "vagrant" : var.ssh_username == "" ? var.user.username : var.ssh_username
