@@ -8,7 +8,7 @@ bootloader --timeout=1 --location=mbr --append="net.ifnames=0 biosdevname=0"
 zerombr
 clearpart --all --initlabel
 autopart --nohome --nolvm --noboot
-network --bootproto=dhcp
+network --bootproto=dhcp --device=link --activate --onboot=on
 firstboot --disable
 selinux --permissive
 firewall --enabled --ssh
