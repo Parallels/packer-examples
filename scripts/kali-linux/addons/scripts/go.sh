@@ -4,7 +4,7 @@ install() {
   echo "Installing Golang"
   sudo apt-get update
   sudo apt-get -y install curl git
-  sudo snap install go --classic
+  sudo apt install gccgo-go
   go version
 }
 
