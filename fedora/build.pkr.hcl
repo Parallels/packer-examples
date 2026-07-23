@@ -29,10 +29,18 @@ build {
   }
 
   # Addons Installation
+ provisioner "file" {
+    source      = "${path.root}/../scripts/fedora/addons"
+    destination = "/parallels-tools"
+    direction   = "upload"
+    # Only skip if no addons are defined
+    except = length(var.addons) == 0 ? ["parallels-iso.image"] : []
+  }  
+
   provisioner "shell" {
     environment_vars = [
       "ADDONS=${local.addons}",
-      "ADDONS_DIR=${path.root}/../scripts/fedora/addons"
+      "ADDONS_DIR=/parallels-tools/addons"
     ]
     scripts = [
       "${path.root}/../scripts/fedora/addons/install.sh",

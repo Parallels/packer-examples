@@ -4,7 +4,7 @@ HOME_DIR="${HOME_DIR:-/home/$DEFAULT_USERNAME}"
 install() {
   # Install required dependencies
   sudo dnf update -y
-  sudo dnf install -y which git wget unzip xz tar lib32stdc++6 curl
+  sudo dnf install -y which git wget unzip xz tar curl
 
   cd $HOME_DIR
   # Download and extract Flutter SDK
@@ -21,7 +21,7 @@ install() {
   source $HOME_DIR/.bashrc
 
   # Run Flutter doctor to verify installation
-  flutter doctor
+  "$HOME_DIR/flutter/bin/flutter" doctor
 }
 
 install

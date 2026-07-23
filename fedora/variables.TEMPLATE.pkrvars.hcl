@@ -3,16 +3,16 @@ user = {
   encrypted_password = "$6$parallels$tb6hm4RSqzwG3j51DSzdFD7Zw3Fxy/x5aen.Yvud7IfLqarIxMEuuM8efQy0gO.pHhT.lIz9tNYoppTGBGCsB/"
   password           = "parallels"
 }
-version      = "42-1.1"
-machine_name = "fedora-42 ARM"
+version      = "44"
+machine_name = "fedora-44 ARM"
 hostname     = "fedora-Server"
 machine_specs = {
   cpus      = 2,
   memory    = 4096,
   disk_size = "65536",
 }
-iso_url            = "https://fedora.c3sl.ufpr.br/linux/releases/42/Server/aarch64/iso/Fedora-Server-dvd-aarch64-42-1.1.iso"
-iso_checksum       = "sha256:6527d67f98627d3fa973d95475b008b7496bf9800c68fe00e91a4e020505d3c9"
+iso_url            = "https://download.fedoraproject.org/pub/fedora/linux/releases/44/Server/aarch64/iso/Fedora-Server-dvd-aarch64-44-1.7.iso"
+iso_checksum       = "sha256:ba8372682294d0d76f79427cae1273d36891b192ac9bf0f0f9de4e97a7cbe218"
 
 
 addons             = []
